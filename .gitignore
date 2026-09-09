@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-electron/
+release/
+
+# Local data — never publish real or demo pharmacy data
+*.sqlite
+*.sqlite-journal
+
+# Health Canada Drug Product Database raw extract (large, regenerable — see scripts/build-medicaments-dpd.mjs)
+scripts/dpd-src/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Claude Code local tooling / scratch build folders (not part of the shipped product)
+.claude/
+_guide_build/
+
