@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ShieldPlus, LogIn, UserPlus, KeyRound } from 'lucide-react'
+import { ShieldPlus, LogIn, UserPlus } from 'lucide-react'
 import {
   compterUtilisateurs,
   listUtilisateurs,
@@ -164,12 +164,9 @@ function SetupAdmin({ onDone, onRetourConnexion }: { onDone: (s: SessionUtilisat
 
   return (
     <Card>
-      <div className="flex items-center gap-2 mb-4">
-        <KeyRound size={16} className="text-sarcelle-600" />
-        <p className="kicker text-sarcelle-600">Première utilisation</p>
-      </div>
+      <h2 className="text-[16px] font-semibold text-encre mb-1.5">Créer le compte administrateur</h2>
       <p className="text-[13px] text-ardoise-500 mb-5">
-        Créez le compte administrateur principal. Cette personne pourra ensuite ajouter les autres membres de l'équipe et gérer les archives.
+        Cette personne pourra ensuite ajouter les autres membres de l'équipe et gérer les archives.
       </p>
       <form onSubmit={handleSubmit}>
         {erreur && <div className="mb-4 text-[13px] font-medium text-alerte bg-alerte/10 border-2 border-alerte/40 rounded-xl2 px-4 py-2.5">{erreur}</div>}

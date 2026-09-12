@@ -50,8 +50,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           return (
             <div
               key={t.id}
-              className="pointer-events-auto flex items-center gap-2.5 bg-encre text-white rounded-xl2 shadow-modal pl-3 pr-2 py-2.5 min-w-[220px] max-w-[360px]"
-              style={{ animation: 'toast-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both', borderLeft: `3px solid ${style.accent}` }}
+              className="pointer-events-auto flex items-center gap-2.5 bg-encre text-white rounded-xl2 shadow-modal pl-3.5 pr-2 py-2.5 min-w-[220px] max-w-[360px]"
+              style={{ animation: 'toast-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both' }}
               role="status"
             >
               <span style={{ color: style.accent }} className="shrink-0">

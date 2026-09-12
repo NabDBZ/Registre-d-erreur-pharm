@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { AlertTriangle, FilePlus2, TrendingUp, Inbox, CheckCircle2, Clock } from 'lucide-react'
+import { AlertTriangle, FilePlus2, Inbox, Clock } from 'lucide-react'
 import { listEvenements, listDossiersStagnants } from '../db/database'
-import { Card, PageHeader, Button, GraviteBadge, StatutBadge, EmptyState, BlisterStat } from '../components/ui'
+import { Card, PageHeader, Button, GraviteBadge, StatutBadge, EmptyState } from '../components/ui'
 import { serieParMois, compterParGravite, detecterRecurrences } from '../lib/stats'
 import { graviteInfo } from '../constants'
 import { formatDateCourte, parseDateLocale } from '../lib/dates'
@@ -33,7 +33,6 @@ export default function Dashboard() {
   return (
     <div>
       <PageHeader
-        kicker="Vue d'ensemble"
         title="Tableau de bord"
         subtitle="Sécurité du circuit du médicament — suivi en temps réel"
         actions={
@@ -45,24 +44,38 @@ export default function Dashboard() {
         }
       />
 
-      <div className="grid grid-cols-4 gap-4 mb-6 stagger">
-        <BlisterStat icon={<Inbox size={20} />} label="Total déclarés" value={evenements.length} tone="brand" />
-        <BlisterStat icon={<TrendingUp size={20} />} label="Ce mois-ci" value={ceMois.length} tone="brand" />
-        <BlisterStat icon={<AlertTriangle size={20} />} label="Dossiers ouverts" value={ouverts.length} tone={ouverts.length > 0 ? 'warn' : 'neutral'} />
-        <BlisterStat icon={<CheckCircle2 size={20} />} label="Fermés" value={evenements.length - ouverts.length} tone="neutral" />
-      </div>
+      <Card className="mb-6 overflow-hidden">
+        <div className="flex divide-x divide-ligne">
+          <div className="flex-1 min-w-0 px-6 py-5">
+            <div className="num text-[22px] font-bold text-ardoise-700 leading-none">{evenements.length}</div>
+            <div className="text-[12.5px] text-ardoise-500 mt-1.5">Total déclarés</div>
+          </div>
+          <div className="flex-1 min-w-0 px-6 py-5">
+            <div className="num text-[22px] font-bold text-ardoise-700 leading-none">{ceMois.length}</div>
+            <div className="text-[12.5px] text-ardoise-500 mt-1.5">Ce mois-ci</div>
+          </div>
+          <div className="flex-1 min-w-0 px-6 py-5 bg-ambre-100/40">
+            <div className={`num text-[28px] font-bold leading-none ${ouverts.length > 0 ? 'text-[#7a5714]' : 'text-ardoise-700'}`}>{ouverts.length}</div>
+            <div className="text-[12.5px] font-medium text-ardoise-700 mt-1.5">Dossiers ouverts — à traiter</div>
+          </div>
+          <div className="flex-1 min-w-0 px-6 py-5">
+            <div className="num text-[22px] font-bold text-ardoise-700 leading-none">{evenements.length - ouverts.length}</div>
+            <div className="text-[12.5px] text-ardoise-500 mt-1.5">Fermés</div>
+          </div>
+        </div>
+      </Card>
 
       {recurrences.length > 0 && (
-        <div className="relative rounded-xl2 mb-6 border border-ligne border-l-4 border-l-ambre bg-ambre-100 overflow-hidden">
+        <div className="rounded-xl2 mb-6 border border-ambre/35 bg-ambre-100">
           <div className="p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="text-[#7a5714] shrink-0 mt-0.5" size={20} />
               <div>
-                <h3 className="kicker text-[#7a5714] mb-1.5">Récurrences détectées · 90 derniers jours</h3>
+                <h3 className="text-[14.5px] font-semibold text-[#7a5714] mb-1.5">Récurrences détectées · 90 derniers jours</h3>
                 <p className="text-[13px] text-ardoise-700 mb-3">Ces éléments reviennent fréquemment — une analyse des causes pourrait être utile.</p>
                 <div className="flex flex-wrap gap-2">
                   {recurrences.map((r) => (
-                    <span key={r.type + r.cle} className="text-[12px] bg-white border-2 border-ambre/50 rounded px-3 py-1 text-[#7a5714] font-semibold">
+                    <span key={r.type + r.cle} className="text-[12px] bg-white border border-ambre/50 rounded px-3 py-1 text-[#7a5714] font-semibold">
                       {r.cle} <span className="num">× {r.total}</span>
                     </span>
                   ))}
@@ -74,11 +87,11 @@ export default function Dashboard() {
       )}
 
       {stagnants.length > 0 && (
-        <Card className="p-5 mb-6" accent="#3c4c50">
+        <Card className="p-5 mb-6">
           <div className="flex items-start gap-3">
             <Clock className="text-ardoise-500 shrink-0 mt-0.5" size={20} />
             <div className="flex-1 min-w-0">
-              <h3 className="kicker text-ardoise-500 mb-1.5">Dossiers en attente de suivi · sans mise à jour depuis 14 jours et plus</h3>
+              <h3 className="text-[14.5px] font-semibold text-ardoise-700 mb-1.5">Dossiers en attente de suivi · sans mise à jour depuis 14 jours et plus</h3>
               <p className="text-[13px] text-ardoise-700 mb-3">Ces dossiers restent ouverts sans activité récente — un suivi rapide évite qu'ils ne s'égarent.</p>
               <div className="space-y-1.5">
                 {stagnants.slice(0, 4).map((d) => (
@@ -96,8 +109,8 @@ export default function Dashboard() {
       )}
 
       <div className="grid grid-cols-3 gap-4 mb-6">
-        <Card className="p-5 col-span-2" accent="#0e7c74">
-          <h3 className="kicker text-ardoise-500 mb-4">Tendance mensuelle · 12 derniers mois</h3>
+        <Card className="p-5 col-span-2">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Tendance mensuelle <span className="text-ardoise-500 font-medium">· 12 derniers mois</span></h3>
           <ResponsiveContainer width="100%" height={220}>
             <ComposedChart data={serieMois}>
               <defs>
@@ -117,8 +130,8 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </Card>
 
-        <Card className="p-5" accent="#b23b3b">
-          <h3 className="kicker text-ardoise-500 mb-4">Par gravité</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Par gravité</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parGravite} layout="vertical" margin={{ left: 0 }}>
               <XAxis type="number" hide allowDecimals={false} />
@@ -136,7 +149,7 @@ export default function Dashboard() {
 
       <Card className="p-5">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="kicker text-ardoise-500">Signalements récents</h3>
+          <h3 className="text-[15px] font-semibold text-encre">Signalements récents</h3>
           <Link to="/registre" className="text-[13px] text-sarcelle-600 font-bold hover:underline">
             Voir le registre complet →
           </Link>

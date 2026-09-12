@@ -164,7 +164,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
   if (editing) {
     return (
       <div>
-        <PageHeader kicker="Modification" title={`Modifier le signalement #${evenement.numero}`} />
+        <PageHeader title={`Modifier le signalement #${evenement.numero}`} />
         <EvenementForm existing={evenement} onSubmit={handleUpdate} onCancel={() => setEditing(false)} submitLabel="Enregistrer les modifications" />
       </div>
     )
@@ -193,7 +193,6 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
       </Link>
 
       <PageHeader
-        kicker="Dossier"
         title={`Signalement #${evenement.numero}`}
         subtitle={`Déclaré le ${formatDateLongue(evenement.date_declaration.slice(0, 10))}${evenement.cree_par ? ' par ' + evenement.cree_par : ''}`}
         actions={
@@ -258,7 +257,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
       <div className="grid grid-cols-3 gap-5 print-stack">
         <div className="col-span-2 space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Contexte</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-4">Contexte</h3>
             <dl className="grid grid-cols-2 gap-y-3 text-[13px]">
               <Info label="Date de l'événement" value={`${formatDateLongue(evenement.date_evenement)}${evenement.heure_evenement ? ' à ' + evenement.heure_evenement : ''}`} />
               <Info label="Milieu" value={evenement.milieu} />
@@ -271,7 +270,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
           {(evenement.medicament_nom || evenement.medicament_din || evenement.classe_therapeutique) && (
             <Card className="p-6">
-              <h3 className="kicker text-ardoise-500 mb-4">Médicament concerné</h3>
+              <h3 className="text-[15px] font-semibold text-encre mb-4">Médicament concerné</h3>
               <dl className="grid grid-cols-2 gap-y-3 text-[13px]">
                 <Info label="Nom" value={evenement.medicament_nom || '—'} />
                 <Info label="DIN" value={evenement.medicament_din || '—'} />
@@ -282,7 +281,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           )}
 
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-3">Description</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-3">Description</h3>
             <p className="text-[13px] text-ardoise-700 whitespace-pre-wrap leading-relaxed">{evenement.description}</p>
 
             {causes.length > 0 && (
@@ -309,7 +308,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           <Card className="p-6">
             <div className="flex items-center gap-2 mb-1">
               <ListChecks size={15} className="text-ardoise-500" />
-              <h3 className="kicker text-ardoise-500">Mesures correctives — suivi</h3>
+              <h3 className="text-[15px] font-semibold text-encre">Mesures correctives — suivi</h3>
             </div>
             <p className="text-[12px] text-ardoise-500 mb-4">Transformez le plan d'action en tâches concrètes, avec responsable et échéance.</p>
             {actionsCorrectives.length === 0 ? (
@@ -380,7 +379,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-1">Personnes impliquées</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-1">Personnes impliquées</h3>
             <p className="text-[12px] text-ardoise-500 mb-4">La signature électronique confirme la prise de connaissance du signalement par la personne concernée.</p>
             {evenement.personnes.length === 0 ? (
               <p className="text-[13px] text-ardoise-500">Aucune personne enregistrée.</p>
@@ -419,7 +418,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           <Card className="p-6 no-print">
             <div className="flex items-center gap-2 mb-3">
               <History size={15} className="text-ardoise-500" />
-              <h3 className="kicker text-ardoise-500">Historique et traçabilité</h3>
+              <h3 className="text-[15px] font-semibold text-encre">Historique et traçabilité</h3>
             </div>
             {historique.length === 0 ? (
               <p className="text-[13px] text-ardoise-500">Aucune entrée.</p>
@@ -443,52 +442,59 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
         <div className="space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Divulgation au patient</h3>
-            <p className="text-[13px] text-ardoise-700 mb-2">{evenement.divulgue_patient ? 'Divulgué' : 'Non divulgué'}</p>
+            <h3 className="text-[15px] font-semibold text-encre mb-3">Divulgation et FARPOPQ</h3>
+
+            <div className="flex items-center justify-between">
+              <span className="text-[13px] text-ardoise-700">Divulgation au patient</span>
+              <span className={`text-[12px] font-semibold ${evenement.divulgue_patient ? 'text-sarcelle-600' : 'text-ardoise-500'}`}>
+                {evenement.divulgue_patient ? 'Divulgué' : 'Non divulgué'}
+              </span>
+            </div>
             {evenement.divulgue_patient === 1 && (
-              <dl className="text-[13px] space-y-2">
+              <dl className="text-[13px] space-y-1.5 mt-2">
                 <Info label="Date" value={evenement.divulgue_le || '—'} />
                 <Info label="Par" value={evenement.divulgue_par || '—'} />
               </dl>
             )}
-          </Card>
 
-          <Card className="p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <ShieldAlert size={15} className="text-ardoise-500" />
-              <h3 className="kicker text-ardoise-500">Avis à la FARPOPQ</h3>
-            </div>
-            <p className="text-[13px] text-ardoise-700 mb-2">{evenement.farpopq_avise ? "Fonds d'assurance avisé" : 'Non avisé'}</p>
-            {evenement.farpopq_avise === 1 && (
-              <>
-                <dl className="text-[13px] space-y-2 mb-3">
-                  <Info label="Date" value={evenement.farpopq_avise_le ? formatDateLongue(evenement.farpopq_avise_le) : '—'} />
-                  <Info label="Par" value={evenement.farpopq_avise_par || '—'} />
-                </dl>
-                {evenement.farpopq_resume && (
-                  <details className="text-[12px]">
-                    <summary className="text-sarcelle-600 font-semibold cursor-pointer select-none">Voir le résumé transmis</summary>
-                    <pre className="mt-2 text-ardoise-900 bg-ligne border border-ligne rounded-xl2 p-3 max-h-[220px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
-                      {evenement.farpopq_resume}
-                    </pre>
-                  </details>
-                )}
-              </>
-            )}
-            <div className="flex flex-wrap gap-2 mt-3 no-print">
-              {!evenement.farpopq_avise && isAdmin && !estArchive && (
-                <Button variant="secondary" size="sm" onClick={() => setFarpopqModal(true)}>
-                  <ShieldAlert size={14} /> Préparer la déclaration
-                </Button>
+            <div className="mt-4 pt-4 border-t border-ligne">
+              <div className="flex items-center justify-between">
+                <span className="text-[13px] text-ardoise-700">Avis à la FARPOPQ</span>
+                <span className={`text-[12px] font-semibold ${evenement.farpopq_avise ? 'text-sarcelle-600' : 'text-ardoise-500'}`}>
+                  {evenement.farpopq_avise ? 'Avisée' : 'Non avisée'}
+                </span>
+              </div>
+              {evenement.farpopq_avise === 1 && (
+                <>
+                  <dl className="text-[13px] space-y-1.5 mt-2 mb-2">
+                    <Info label="Date" value={evenement.farpopq_avise_le ? formatDateLongue(evenement.farpopq_avise_le) : '—'} />
+                    <Info label="Par" value={evenement.farpopq_avise_par || '—'} />
+                  </dl>
+                  {evenement.farpopq_resume && (
+                    <details className="text-[12px]">
+                      <summary className="text-sarcelle-600 font-semibold cursor-pointer select-none">Voir le résumé transmis</summary>
+                      <pre className="mt-2 text-ardoise-900 bg-ligne border border-ligne rounded-xl2 p-3 max-h-[220px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
+                        {evenement.farpopq_resume}
+                      </pre>
+                    </details>
+                  )}
+                </>
               )}
-              <Button variant="ghost" size="sm" onClick={handleOuvrirFarpopq}>
-                <ExternalLink size={14} /> Espace membre FARPOPQ
-              </Button>
+              <div className="flex flex-wrap gap-2 mt-3 no-print">
+                {!evenement.farpopq_avise && isAdmin && !estArchive && (
+                  <Button variant="secondary" size="sm" onClick={() => setFarpopqModal(true)}>
+                    <ShieldAlert size={14} /> Préparer la déclaration
+                  </Button>
+                )}
+                <Button variant="ghost" size="sm" onClick={handleOuvrirFarpopq}>
+                  <ExternalLink size={14} /> Espace membre FARPOPQ
+                </Button>
+              </div>
             </div>
           </Card>
 
           <Card className="p-6 no-print">
-            <h3 className="kicker text-ardoise-500 mb-3">Traçabilité</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-3">Traçabilité</h3>
             <dl className="text-[13px] space-y-2.5">
               <Info label="Créé par" value={evenement.cree_par || '—'} />
               <Info label="Créé le" value={formatDateLongue(evenement.cree_le.slice(0, 10))} />

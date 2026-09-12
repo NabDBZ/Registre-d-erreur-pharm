@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Search } from 'lucide-react'
 import { graviteInfo } from '../constants'
-import { useCountUp } from '../lib/useCountUp'
 
 export function Card({ children, className = '', accent, hoverable = false }: { children: React.ReactNode; className?: string; accent?: string; hoverable?: boolean }) {
   return (
@@ -71,10 +70,10 @@ export function StatutBadge({ statut }: { statut: string }) {
   return <Badge tone={tone as any}>{statut}</Badge>
 }
 
-export function Field({ label, children, hint, required }: { label: string; children: React.ReactNode; hint?: string; required?: boolean }) {
+export function Field({ label, children, hint, required, className = '' }: { label: string; children: React.ReactNode; hint?: string; required?: boolean; className?: string }) {
   return (
-    <label className="block mb-4">
-      <span className="kicker block text-ardoise-500 mb-2">
+    <label className={`block mb-4 ${className}`}>
+      <span className="block text-[12.5px] font-medium text-ardoise-500 mb-2">
         {label} {required && <span className="text-alerte">*</span>}
       </span>
       {children}
@@ -223,13 +222,12 @@ export function AutocompleteInput<T extends Suggestion>({
   )
 }
 
-export function PageHeader({ kicker, title, subtitle, actions }: { kicker?: string; title: string; subtitle?: string; actions?: React.ReactNode }) {
+export function PageHeader({ title, subtitle, actions }: { title: string; subtitle?: string; actions?: React.ReactNode }) {
   return (
-    <div className="flex items-start justify-between mb-7 gap-4 flex-wrap border-b border-ligne-forte pb-5">
+    <div className="flex items-start justify-between mb-8 gap-4 flex-wrap">
       <div>
-        {kicker && <p className="kicker text-sarcelle-600 mb-1.5">{kicker}</p>}
-        <h1 className="text-[26px] font-bold text-encre tracking-tight leading-none">{title}</h1>
-        {subtitle && <p className="text-[14px] text-ardoise-500 mt-2 max-w-xl">{subtitle}</p>}
+        <h1 className="text-[30px] font-bold text-encre tracking-tight leading-none text-balance">{title}</h1>
+        {subtitle && <p className="text-[14.5px] text-ardoise-500 mt-2.5 max-w-xl leading-relaxed">{subtitle}</p>}
       </div>
       {actions && <div className="flex items-center gap-2 pt-1">{actions}</div>}
     </div>
@@ -300,26 +298,6 @@ export function MultiCheck({ options, values, onChange }: { options: string[]; v
           {opt}
         </button>
       ))}
-    </div>
-  )
-}
-
-/** Blister-pack readout — a KPI cell shaped like a dosette bubble, numerals in mono. */
-export function BlisterStat({ icon, label, value, tone = 'brand' }: { icon: React.ReactNode; label: string; value: number | string; tone?: 'brand' | 'warn' | 'neutral' }) {
-  const ring =
-    tone === 'warn'
-      ? 'ring-ambre/50 bg-ambre-100 text-[#7a5714]'
-      : tone === 'neutral'
-        ? 'ring-ligne bg-papier text-ardoise-700'
-        : 'ring-sarcelle/30 bg-sarcelle-100 text-sarcelle-600'
-  const animated = useCountUp(typeof value === 'number' ? value : 0)
-  return (
-    <div className="bg-surface rounded-xl2 shadow-card border border-ligne p-4 flex items-center gap-3 min-w-0 transition-shadow duration-200 hover:shadow-pop">
-      <div className={`w-12 h-12 rounded-full ring-4 flex items-center justify-center shrink-0 ${ring}`}>{icon}</div>
-      <div className="min-w-0">
-        <div className="num text-[26px] font-bold text-encre leading-none">{typeof value === 'number' ? animated : value}</div>
-        <div className="font-mono text-[10px] font-bold tracking-wide uppercase text-ardoise-500 mt-1.5 whitespace-nowrap overflow-hidden text-ellipsis">{label}</div>
-      </div>
     </div>
   )
 }

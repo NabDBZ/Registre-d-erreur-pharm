@@ -110,11 +110,11 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
 
   return (
     <div>
-      <PageHeader kicker="Configuration" title="Paramètres" subtitle="Configurez la pharmacie, les listes personnalisées et vos sauvegardes." />
+      <PageHeader title="Paramètres" subtitle="Configurez la pharmacie, les listes personnalisées et vos sauvegardes." />
 
       <div className="grid grid-cols-2 gap-5 mb-5">
         <Card className="p-6">
-          <h3 className="kicker text-ardoise-500 mb-4">Informations de la pharmacie</h3>
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Informations de la pharmacie</h3>
           <form onSubmit={handleSaveInfo}>
             <Field label="Nom de la pharmacie" hint="Affiché dans la barre latérale et les exports.">
               <Input value={nomPharmacie} onChange={(e) => setNomPharmacie(e.target.value)} placeholder="Ex. : Pharmacie Tremblay et associés" />
@@ -129,7 +129,7 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
         </Card>
 
         <Card className="p-6">
-          <h3 className="kicker text-ardoise-500 mb-2">Sauvegarde et restauration</h3>
+          <h3 className="text-[15px] font-semibold text-encre mb-2">Sauvegarde et restauration</h3>
           <p className="text-[13px] text-ardoise-500 mb-4">
             Toutes les données sont stockées localement sur cet ordinateur. Faites des copies de sauvegarde régulières sur une clé USB ou un lecteur réseau.
           </p>
@@ -158,7 +158,7 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
       </div>
 
       <Card className="p-6 mb-5">
-        <h3 className="kicker text-ardoise-500 mb-1">Importer un historique (CSV)</h3>
+        <h3 className="text-[15px] font-semibold text-encre mb-1">Importer un historique (CSV)</h3>
         <p className="text-[13px] text-ardoise-500 mb-4">
           Numérisez un registre papier déjà transcrit dans un tableur : utilisez le même format qu'un fichier <strong>Exporter CSV</strong> de cette application
           (mêmes colonnes), et chaque ligne valide devient un nouveau signalement.
@@ -190,7 +190,7 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
       </Card>
 
       <Card className="p-6">
-        <h3 className="kicker text-ardoise-500 mb-1">Listes personnalisées</h3>
+        <h3 className="text-[15px] font-semibold text-encre mb-1">Listes personnalisées</h3>
         <p className="text-[13px] text-ardoise-500 mb-5">
           Adaptez les options des menus déroulants du formulaire de signalement selon votre pratique (communautaire, préparation, spécialisée, hôpital).
         </p>
@@ -209,7 +209,7 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
       </Card>
 
       <Card className="p-6 mt-5">
-        <h3 className="kicker text-ardoise-500 mb-4">À propos</h3>
+        <h3 className="text-[15px] font-semibold text-encre mb-4">À propos</h3>
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl2 bg-sarcelle-100 flex items-center justify-center text-sarcelle-600 shrink-0">

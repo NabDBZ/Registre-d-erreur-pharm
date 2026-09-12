@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Download, FileSpreadsheet, Search, SearchX, X, FilePlus2, Archive } from 'lucide-react'
+import { Download, FileSpreadsheet, Search, SearchX, X, FilePlus2, Archive, SlidersHorizontal } from 'lucide-react'
 import { listEvenements, listOptions, listPersonnel } from '../db/database'
 import type { FiltresRegistre } from '../types'
 import { Card, PageHeader, Button, Input, Select, GraviteBadge, StatutBadge, Badge, EmptyState } from '../components/ui'
@@ -19,6 +19,7 @@ export default function Registre() {
   const [filtres, setFiltres] = useState<FiltresRegistre>({})
   const [voirArchives, setVoirArchives] = useState(false)
   const [exporting, setExporting] = useState<'csv' | 'xlsx' | null>(null)
+  const [filtresAvancesOuverts, setFiltresAvancesOuverts] = useState(false)
 
   const evenements = useMemo(() => listEvenements({ ...filtres, archivesSeulement: voirArchives }), [filtres, voirArchives])
 
@@ -27,6 +28,7 @@ export default function Registre() {
   }
 
   const filtresActifs = Object.values(filtres).some((v) => v)
+  const filtresAvancesActifs = [filtres.milieu, filtres.etapeCircuit, filtres.typeErreur, filtres.gravite, filtres.personnelId, filtres.medicament].filter(Boolean).length
 
   async function handleExport(type: 'csv' | 'xlsx') {
     setExporting(type)
@@ -41,7 +43,6 @@ export default function Registre() {
   return (
     <div>
       <PageHeader
-        kicker="Registre officiel"
         title="Registre des événements"
         subtitle={`${evenements.length} événement${evenements.length > 1 ? 's' : ''} correspondant${evenements.length > 1 ? 's' : ''}`}
         actions={
@@ -67,22 +68,14 @@ export default function Registre() {
       />
 
       <Card className="p-4 mb-5">
-        <div className="grid grid-cols-6 gap-3">
-          <div className="col-span-2 relative">
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="relative flex-1 min-w-[240px]">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ardoise-300" />
             <Input className="pl-9" placeholder="Rechercher (description, médicament, patient)" value={filtres.recherche ?? ''} onChange={(e) => patch({ recherche: e.target.value })} />
           </div>
-          <Input type="date" value={filtres.dateDebut ?? ''} onChange={(e) => patch({ dateDebut: e.target.value })} title="Date de début" />
-          <Input type="date" value={filtres.dateFin ?? ''} onChange={(e) => patch({ dateFin: e.target.value })} title="Date de fin" />
-          <Select value={filtres.milieu ?? ''} onChange={(e) => patch({ milieu: e.target.value || undefined })}>
-            <option value="">Tous les milieux</option>
-            {milieux.map((m) => (
-              <option key={m.valeur} value={m.valeur}>
-                {m.valeur}
-              </option>
-            ))}
-          </Select>
-          <Select value={filtres.statut ?? ''} onChange={(e) => patch({ statut: e.target.value || undefined })}>
+          <Input type="date" className="w-[150px]" value={filtres.dateDebut ?? ''} onChange={(e) => patch({ dateDebut: e.target.value })} title="Date de début" />
+          <Input type="date" className="w-[150px]" value={filtres.dateFin ?? ''} onChange={(e) => patch({ dateFin: e.target.value })} title="Date de fin" />
+          <Select className="w-44" value={filtres.statut ?? ''} onChange={(e) => patch({ statut: e.target.value || undefined })}>
             <option value="">Tous les statuts</option>
             {['Ouvert', 'En analyse', 'Mesures en cours', 'Fermé'].map((s) => (
               <option key={s} value={s}>
@@ -90,47 +83,61 @@ export default function Registre() {
               </option>
             ))}
           </Select>
-        </div>
-        <div className="grid grid-cols-6 gap-3 mt-3">
-          <Select value={filtres.etapeCircuit ?? ''} onChange={(e) => patch({ etapeCircuit: e.target.value || undefined })}>
-            <option value="">Toutes les étapes</option>
-            {etapes.map((m) => (
-              <option key={m.valeur} value={m.valeur}>
-                {m.valeur}
-              </option>
-            ))}
-          </Select>
-          <Select value={filtres.typeErreur ?? ''} onChange={(e) => patch({ typeErreur: e.target.value || undefined })}>
-            <option value="">Tous les types d'erreur</option>
-            {typesErreur.map((m) => (
-              <option key={m.valeur} value={m.valeur}>
-                {m.valeur}
-              </option>
-            ))}
-          </Select>
-          <Select value={filtres.gravite ?? ''} onChange={(e) => patch({ gravite: e.target.value || undefined })}>
-            <option value="">Toutes les gravités</option>
-            {['A', 'B', 'C', 'D', 'E1', 'E2', 'F', 'G', 'H', 'I'].map((g) => (
-              <option key={g} value={g}>
-                {g}
-              </option>
-            ))}
-          </Select>
-          <Select value={filtres.personnelId ?? ''} onChange={(e) => patch({ personnelId: e.target.value || undefined })}>
-            <option value="">Toutes les personnes</option>
-            {personnelListe.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.nom}
-              </option>
-            ))}
-          </Select>
-          <Input placeholder="Médicament contient…" value={filtres.medicament ?? ''} onChange={(e) => patch({ medicament: e.target.value || undefined })} />
+          <Button variant={filtresAvancesOuverts || filtresAvancesActifs > 0 ? 'primary' : 'secondary'} size="sm" onClick={() => setFiltresAvancesOuverts((v) => !v)}>
+            <SlidersHorizontal size={14} /> Filtres avancés{filtresAvancesActifs > 0 ? ` (${filtresAvancesActifs})` : ''}
+          </Button>
           {filtresActifs && (
             <Button variant="ghost" size="sm" onClick={() => setFiltres({})}>
               <X size={14} /> Réinitialiser
             </Button>
           )}
         </div>
+
+        {filtresAvancesOuverts && (
+          <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-ligne">
+            <Select value={filtres.milieu ?? ''} onChange={(e) => patch({ milieu: e.target.value || undefined })}>
+              <option value="">Tous les milieux</option>
+              {milieux.map((m) => (
+                <option key={m.valeur} value={m.valeur}>
+                  {m.valeur}
+                </option>
+              ))}
+            </Select>
+            <Select value={filtres.etapeCircuit ?? ''} onChange={(e) => patch({ etapeCircuit: e.target.value || undefined })}>
+              <option value="">Toutes les étapes</option>
+              {etapes.map((m) => (
+                <option key={m.valeur} value={m.valeur}>
+                  {m.valeur}
+                </option>
+              ))}
+            </Select>
+            <Select value={filtres.typeErreur ?? ''} onChange={(e) => patch({ typeErreur: e.target.value || undefined })}>
+              <option value="">Tous les types d'erreur</option>
+              {typesErreur.map((m) => (
+                <option key={m.valeur} value={m.valeur}>
+                  {m.valeur}
+                </option>
+              ))}
+            </Select>
+            <Select value={filtres.gravite ?? ''} onChange={(e) => patch({ gravite: e.target.value || undefined })}>
+              <option value="">Toutes les gravités</option>
+              {['A', 'B', 'C', 'D', 'E1', 'E2', 'F', 'G', 'H', 'I'].map((g) => (
+                <option key={g} value={g}>
+                  {g}
+                </option>
+              ))}
+            </Select>
+            <Select value={filtres.personnelId ?? ''} onChange={(e) => patch({ personnelId: e.target.value || undefined })}>
+              <option value="">Toutes les personnes</option>
+              {personnelListe.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.nom}
+                </option>
+              ))}
+            </Select>
+            <Input placeholder="Médicament contient…" value={filtres.medicament ?? ''} onChange={(e) => patch({ medicament: e.target.value || undefined })} />
+          </div>
+        )}
       </Card>
 
       <Card className="overflow-hidden">

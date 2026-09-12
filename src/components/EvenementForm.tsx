@@ -239,7 +239,7 @@ export default function EvenementForm({
       <div className="grid grid-cols-3 gap-5">
         <div className="col-span-2 space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Contexte de l'événement</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-4">Contexte de l'événement</h3>
             <div className="grid grid-cols-2 gap-x-4">
               <Field label="Date de l'événement" required>
                 <Input type="date" value={dateEvenement} onChange={(e) => setDateEvenement(e.target.value)} required />
@@ -251,6 +251,7 @@ export default function EvenementForm({
                 label="Milieu / type de pharmacie"
                 required
                 hint={milieux.length === 0 ? 'Aucune option active — ajoutez-en dans Paramètres.' : undefined}
+                className="col-span-2"
               >
                 <Select value={milieu} onChange={(e) => setMilieu(e.target.value)} disabled={milieux.length === 0}>
                   {milieux.length === 0 && <option value="">Aucune option disponible</option>}
@@ -261,13 +262,11 @@ export default function EvenementForm({
                   ))}
                 </Select>
               </Field>
-              <Field label="Succursale / point de service" hint="Optionnel — utile si plusieurs sites">
-                <Input value={succursale} onChange={(e) => setSuccursale(e.target.value)} placeholder="Ex. : Succursale Centre-ville" />
-              </Field>
               <Field
                 label="Étape du circuit du médicament"
                 required
                 hint={etapes.length === 0 ? 'Aucune option active — ajoutez-en dans Paramètres.' : undefined}
+                className="col-span-2"
               >
                 <Select value={etape} onChange={(e) => setEtape(e.target.value)} disabled={etapes.length === 0}>
                   {etapes.length === 0 && <option value="">Aucune option disponible</option>}
@@ -282,6 +281,7 @@ export default function EvenementForm({
                 label="Type d'erreur / circonstance"
                 required
                 hint={typesErreur.length === 0 ? 'Aucune option active — ajoutez-en dans Paramètres.' : undefined}
+                className="col-span-2"
               >
                 <Select value={typeErreur} onChange={(e) => setTypeErreur(e.target.value)} disabled={typesErreur.length === 0}>
                   {typesErreur.length === 0 && <option value="">Aucune option disponible</option>}
@@ -291,6 +291,9 @@ export default function EvenementForm({
                     </option>
                   ))}
                 </Select>
+              </Field>
+              <Field label="Succursale / point de service" hint="Optionnel — utile si plusieurs sites">
+                <Input value={succursale} onChange={(e) => setSuccursale(e.target.value)} placeholder="Ex. : Succursale Centre-ville" />
               </Field>
               {existing && (
                 <Field label="Statut du dossier">
@@ -307,7 +310,7 @@ export default function EvenementForm({
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Médicament concerné</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-4">Médicament concerné</h3>
             <p className="text-[12px] text-ardoise-500 mb-4 -mt-2">Laissez vide si l'événement n'implique pas un médicament précis (ex. : erreur de livraison, facturation).</p>
             <div className="grid grid-cols-2 gap-x-4">
               <Field label="Nom du médicament" hint="Suggestions à partir d'une liste usuelle et des médicaments déjà utilisés ici — vous pouvez toujours saisir un autre nom.">
@@ -378,7 +381,7 @@ export default function EvenementForm({
           )}
 
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Description et analyse</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-4">Description et analyse</h3>
             <Field label="Description détaillée de la situation" required>
               <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Que s'est-il passé ? Comment l'erreur a-t-elle été détectée ?" required rows={4} />
             </Field>
@@ -391,7 +394,7 @@ export default function EvenementForm({
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-1">Personnes impliquées</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-1">Personnes impliquées</h3>
             <p className="text-[12px] text-ardoise-500 mb-4">Sélectionnez dans le répertoire du personnel ou saisissez un nom (ex. : livreur externe).</p>
             <div className="space-y-3">
               {personnes.map((p) => (
@@ -428,82 +431,90 @@ export default function EvenementForm({
 
         <div className="space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Gravité de l'événement</h3>
-            <div className="space-y-1.5 max-h-[360px] overflow-y-auto pr-1">
+            <h3 className="text-[15px] font-semibold text-encre mb-4">Gravité de l'événement</h3>
+            <div className="grid grid-cols-2 gap-2">
               {GRAVITES.map((g) => (
                 <label
                   key={g.code}
-                  className={`flex items-start gap-3 p-2.5 rounded-xl2 cursor-pointer border-2 transition-colors ${
-                    gravite === g.code ? 'border-encre bg-ligne' : 'border-transparent hover:bg-ligne/60'
+                  className={`flex items-center gap-2 px-2.5 py-2.5 rounded-xl2 cursor-pointer border-2 transition-colors ${
+                    gravite === g.code ? 'border-encre bg-ligne' : 'border-ligne hover:border-ardoise-300'
                   }`}
                 >
                   <input type="radio" name="gravite" className="sr-only" checked={gravite === g.code} onChange={() => setGravite(g.code)} />
                   <span
-                    className="hazard-diamond shrink-0 mt-0.5 inline-flex items-center justify-center font-mono font-bold text-white text-[9px]"
+                    className="hazard-diamond shrink-0 inline-flex items-center justify-center font-mono font-bold text-white text-[9px]"
                     style={{ width: 22, height: 22, backgroundColor: g.couleur }}
                   >
                     {g.code}
                   </span>
-                  <div>
-                    <span className="text-[13px] font-bold text-encre">{g.label}</span>
-                    <p className="text-[12px] text-ardoise-500 mt-0.5">{g.description}</p>
-                  </div>
+                  <span className="text-[12px] font-semibold text-encre leading-tight">{g.label.replace(/^.*?—\s*/, '')}</span>
                 </label>
               ))}
+            </div>
+            <div className="mt-3 p-3.5 rounded-xl2 bg-ligne/50">
+              <div className="flex items-center gap-2 mb-1">
+                <span
+                  className="hazard-diamond shrink-0 inline-flex items-center justify-center font-mono font-bold text-white text-[9px]"
+                  style={{ width: 20, height: 20, backgroundColor: graviteSelectionnee.couleur }}
+                >
+                  {graviteSelectionnee.code}
+                </span>
+                <span className="text-[13px] font-bold text-encre">{graviteSelectionnee.label}</span>
+              </div>
+              <p className="text-[12.5px] text-ardoise-700 leading-relaxed">{graviteSelectionnee.description}</p>
             </div>
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Patient</h3>
+            <h3 className="text-[15px] font-semibold text-encre mb-4">Patient et suivi réglementaire</h3>
+
             <Field label="Identifiant du patient" hint="Utilisez des initiales ou un numéro de dossier — évitez le nom complet pour protéger la confidentialité.">
               <Input value={patientId} onChange={(e) => setPatientId(e.target.value)} placeholder="Ex. : J.T. — dossier 48213" />
             </Field>
-          </Card>
 
-          <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Divulgation au patient</h3>
-            <label className="flex items-center gap-2 mb-3 cursor-pointer">
-              <input type="checkbox" checked={divulgue} onChange={(e) => setDivulgue(e.target.checked)} />
-              <span className="text-[13px] text-ardoise-700">L'événement a été divulgué au patient / à ses proches</span>
-            </label>
-            {divulgue && (
-              <div className="space-y-3">
-                <Field label="Date de divulgation">
-                  <Input type="date" value={divulgueLe} onChange={(e) => setDivulgueLe(e.target.value)} />
-                </Field>
-                <Field label="Divulgué par">
-                  <Input value={divulguePar} onChange={(e) => setDivulguePar(e.target.value)} placeholder="Nom du pharmacien" />
-                </Field>
-              </div>
-            )}
-            {graviteSelectionnee.poids >= 4 && !divulgue && (
-              <p className="text-[12px] font-medium text-[#7a5714] bg-ambre/10 border-2 border-ambre/40 rounded-xl2 px-3 py-2 mt-1">
-                Gravité {graviteSelectionnee.code} : la divulgation au patient est généralement obligatoire selon les standards de l'OPQ.
-              </p>
-            )}
-          </Card>
+            <div className="mt-5 pt-5 border-t border-ligne">
+              <label className="flex items-center gap-2 mb-3 cursor-pointer">
+                <input type="checkbox" checked={divulgue} onChange={(e) => setDivulgue(e.target.checked)} />
+                <span className="text-[13px] text-ardoise-700">Divulgué au patient / à ses proches</span>
+              </label>
+              {divulgue && (
+                <div className="space-y-3 mb-1">
+                  <Field label="Date de divulgation">
+                    <Input type="date" value={divulgueLe} onChange={(e) => setDivulgueLe(e.target.value)} />
+                  </Field>
+                  <Field label="Divulgué par">
+                    <Input value={divulguePar} onChange={(e) => setDivulguePar(e.target.value)} placeholder="Nom du pharmacien" />
+                  </Field>
+                </div>
+              )}
+              {graviteSelectionnee.poids >= 4 && !divulgue && (
+                <p className="text-[12px] font-medium text-[#7a5714] bg-ambre/10 rounded-xl2 px-3 py-2">
+                  Gravité {graviteSelectionnee.code} : la divulgation au patient est généralement obligatoire selon les standards de l'OPQ.
+                </p>
+              )}
+            </div>
 
-          <Card className="p-6">
-            <h3 className="kicker text-ardoise-500 mb-4">Avis à la FARPOPQ</h3>
-            <label className="flex items-center gap-2 mb-3 cursor-pointer">
-              <input type="checkbox" checked={farpopqAvise} onChange={(e) => setFarpopqAvise(e.target.checked)} />
-              <span className="text-[13px] text-ardoise-700">Le Fonds d'assurance responsabilité professionnelle (FARPOPQ) a été avisé</span>
-            </label>
-            {farpopqAvise && (
-              <div className="space-y-3">
-                <Field label="Date de l'avis">
-                  <Input type="date" value={farpopqAviseLe} onChange={(e) => setFarpopqAviseLe(e.target.value)} />
-                </Field>
-                <Field label="Avisé par">
-                  <Input value={farpopqAvisePar} onChange={(e) => setFarpopqAvisePar(e.target.value)} placeholder="Nom du pharmacien" />
-                </Field>
-              </div>
-            )}
-            {graviteSelectionnee.poids >= 6 && !farpopqAvise && (
-              <p className="text-[12px] font-medium text-[#7a5714] bg-ambre/10 border-2 border-ambre/40 rounded-xl2 px-3 py-2 mt-1">
-                Gravité {graviteSelectionnee.code} : envisagez d'aviser la FARPOPQ pour assurer votre couverture en cas de poursuite.
-              </p>
-            )}
+            <div className="mt-5 pt-5 border-t border-ligne">
+              <label className="flex items-center gap-2 mb-3 cursor-pointer">
+                <input type="checkbox" checked={farpopqAvise} onChange={(e) => setFarpopqAvise(e.target.checked)} />
+                <span className="text-[13px] text-ardoise-700">FARPOPQ avisée</span>
+              </label>
+              {farpopqAvise && (
+                <div className="space-y-3 mb-1">
+                  <Field label="Date de l'avis">
+                    <Input type="date" value={farpopqAviseLe} onChange={(e) => setFarpopqAviseLe(e.target.value)} />
+                  </Field>
+                  <Field label="Avisé par">
+                    <Input value={farpopqAvisePar} onChange={(e) => setFarpopqAvisePar(e.target.value)} placeholder="Nom du pharmacien" />
+                  </Field>
+                </div>
+              )}
+              {graviteSelectionnee.poids >= 6 && !farpopqAvise && (
+                <p className="text-[12px] font-medium text-[#7a5714] bg-ambre/10 rounded-xl2 px-3 py-2">
+                  Gravité {graviteSelectionnee.code} : envisagez d'aviser le Fonds d'assurance responsabilité professionnelle pour assurer votre couverture en cas de poursuite.
+                </p>
+              )}
+            </div>
           </Card>
         </div>
       </div>

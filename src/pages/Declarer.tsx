@@ -20,9 +20,8 @@ export default function Declarer({ onSaved }: { onSaved: () => void }) {
   return (
     <div>
       <PageHeader
-        kicker="Formulaire AH-223 · interne"
         title="Nouveau signalement"
-        subtitle="Déclarez un incident ou un accident lié à la médication, à la livraison ou à un processus de la pharmacie."
+        subtitle="Déclarez un incident ou un accident lié à la médication, à la livraison ou à un processus de la pharmacie — formulaire AH-223."
       />
       <EvenementForm onSubmit={handleSubmit} />
     </div>

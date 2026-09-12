@@ -52,7 +52,6 @@ export default function Journal() {
   return (
     <div>
       <PageHeader
-        kicker="Traçabilité"
         title="Journal d'audit"
         subtitle="Historique complet et infalsifiable des actions effectuées dans le registre : qui, quoi, quand."
       />

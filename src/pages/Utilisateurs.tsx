@@ -18,7 +18,6 @@ export default function Utilisateurs() {
   return (
     <div>
       <PageHeader
-        kicker="Accès et sécurité"
         title="Utilisateurs"
         subtitle="Gérez les comptes autorisés à accéder au registre. Toutes les actions sont journalisées dans le journal d'audit."
         actions={

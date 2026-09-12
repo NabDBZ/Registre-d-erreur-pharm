@@ -26,7 +26,6 @@ export default function Personnel() {
   return (
     <div>
       <PageHeader
-        kicker="Équipe"
         title="Personnel"
         subtitle="Répertoire des pharmaciens, ATP, stagiaires et livreurs pour associer les personnes impliquées dans un événement."
         actions={

@@ -100,7 +100,6 @@ export default function Statistiques() {
   return (
     <div>
       <PageHeader
-        kicker="Analyse & tendances"
         title="Statistiques et analyses"
         subtitle="Identifiez les tendances, récurrences et facteurs de risque pour orienter vos mesures préventives."
         actions={
@@ -147,9 +146,9 @@ export default function Statistiques() {
       </Card>
 
       {recurrences.length > 0 && (
-        <Card className="p-5 mb-6" accent="#c2871e">
+        <div className="rounded-xl2 mb-6 border border-ambre/35 bg-ambre-100 p-5">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="kicker text-[#7a5714]">Récurrences · seuil ≥ {seuilRecurrence}</h3>
+            <h3 className="text-[14.5px] font-semibold text-[#7a5714]">Récurrences · seuil ≥ {seuilRecurrence}</h3>
             <label className="flex items-center gap-2 text-[12px] text-ardoise-500 no-print">
               Seuil
               <Input type="number" min={2} max={20} value={seuilRecurrence} onChange={(e) => setSeuilRecurrence(Number(e.target.value) || 2)} className="w-16 py-1" />
@@ -157,7 +156,7 @@ export default function Statistiques() {
           </div>
           <div className="grid grid-cols-3 gap-2">
             {recurrences.map((r) => (
-              <div key={r.type + r.cle} className="flex items-center justify-between bg-ambre/10 border border-ambre/30 rounded px-3 py-2 text-[13px]">
+              <div key={r.type + r.cle} className="flex items-center justify-between bg-white border border-ambre/30 rounded px-3 py-2 text-[13px]">
                 <span className="text-ardoise-900 truncate">
                   {r.cle}
                   <span className="text-ardoise-500 ml-1">
@@ -168,31 +167,31 @@ export default function Statistiques() {
               </div>
             ))}
           </div>
-        </Card>
+        </div>
       )}
 
       <div className="grid grid-cols-2 gap-5 mb-5 print-stack stagger">
-        <Card className="p-5" accent="#0e7c74">
-          <h3 className="kicker text-ardoise-500 mb-4">Top types d'erreur</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Top types d'erreur</h3>
           <HBar data={parType} color="#0e7c74" />
         </Card>
-        <Card className="p-5" accent="#234750">
-          <h3 className="kicker text-ardoise-500 mb-4">Étape du circuit du médicament</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Étape du circuit du médicament</h3>
           <HBar data={parEtape} color="#234750" />
         </Card>
-        <Card className="p-5" accent="#c2871e">
-          <h3 className="kicker text-ardoise-500 mb-4">Médicaments les plus concernés</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Médicaments les plus concernés</h3>
           {parMed.length === 0 ? <p className="text-[13px] text-ardoise-500">Aucune donnée.</p> : <HBar data={parMed} color="#c2871e" />}
         </Card>
-        <Card className="p-5" accent="#3c4c50">
-          <h3 className="kicker text-ardoise-500 mb-4">Par personne impliquée</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Par personne impliquée</h3>
           {parPersonne.length === 0 ? <p className="text-[13px] text-ardoise-500">Aucune donnée.</p> : <HBar data={parPersonne} color="#3c4c50" />}
         </Card>
       </div>
 
       <div className="grid grid-cols-3 gap-5 print-stack stagger">
-        <Card className="p-5" accent="#b23b3b">
-          <h3 className="kicker text-ardoise-500 mb-4">Par gravité</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Par gravité</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parGravite}>
               <CartesianGrid strokeDasharray="3 3" stroke="#dce3e1" vertical={false} />
@@ -208,8 +207,8 @@ export default function Statistiques() {
           </ResponsiveContainer>
         </Card>
 
-        <Card className="p-5" accent="#0a6259">
-          <h3 className="kicker text-ardoise-500 mb-4">Par saison</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Par saison</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parSaison.map((s) => ({ ...s, label: SEASON_LABELS[s.cle] ?? s.cle }))}>
               <CartesianGrid strokeDasharray="3 3" stroke="#dce3e1" vertical={false} />
@@ -221,8 +220,8 @@ export default function Statistiques() {
           </ResponsiveContainer>
         </Card>
 
-        <Card className="p-5" accent="#12262b">
-          <h3 className="kicker text-ardoise-500 mb-4">Par trimestre</h3>
+        <Card className="p-5">
+          <h3 className="text-[15px] font-semibold text-encre mb-4">Par trimestre</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parTrimestre}>
               <CartesianGrid strokeDasharray="3 3" stroke="#dce3e1" vertical={false} />

@@ -12,8 +12,8 @@ const items = [
 ]
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `flex items-center gap-3 px-3 py-2.5 rounded-xl2 text-[14px] font-medium transition-colors border-l-[3px] ${
-    isActive ? 'bg-sarcelle text-white border-sarcelle' : 'text-ardoise-300 border-transparent hover:bg-encre-600/60 hover:text-white'
+  `flex items-center gap-3 px-3 py-2.5 rounded-xl2 text-[14px] font-medium transition-colors ${
+    isActive ? 'bg-sarcelle text-white' : 'text-ardoise-300 hover:bg-encre-600/60 hover:text-white'
   }`
 
 export default function Sidebar({ pharmacyName, session, onLogout }: { pharmacyName: string; session: SessionUtilisateur; onLogout: () => void }) {
