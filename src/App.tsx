@@ -56,10 +56,10 @@ function AppInner() {
 
   if (error) {
     return (
-      <div className="h-screen flex items-center justify-center bg-canvas text-center px-6">
+      <div className="h-screen flex items-center justify-center bg-papier text-center px-6">
         <div>
-          <p className="text-hazard-h font-semibold mb-2">Erreur d'initialisation de la base de données</p>
-          <p className="text-steel text-sm">{error}</p>
+          <p className="text-alerte font-semibold mb-2">Erreur d'initialisation de la base de données</p>
+          <p className="text-ardoise-500 text-sm">{error}</p>
         </div>
       </div>
     )
@@ -67,9 +67,9 @@ function AppInner() {
 
   if (!ready) {
     return (
-      <div className="h-screen flex items-center justify-center bg-canvas">
-        <div className="flex flex-col items-center gap-3 text-graphite">
-          <div className="w-10 h-10 rounded-md bg-brand-500 text-white flex items-center justify-center animate-pulse">
+      <div className="h-screen flex items-center justify-center bg-papier">
+        <div className="flex flex-col items-center gap-3 text-ardoise-700">
+          <div className="w-10 h-10 rounded-xl2 bg-sarcelle text-white flex items-center justify-center animate-pulse">
             <ShieldPlus size={20} />
           </div>
           <p className="kicker">Chargement du registre…</p>
@@ -87,7 +87,7 @@ function AppInner() {
   return (
     <AuthContext.Provider value={{ session, logout: () => setSession(null) }}>
       <CommandPalette session={session} />
-      <div className="h-screen flex bg-canvas">
+      <div className="h-screen flex bg-papier">
         <Sidebar pharmacyName={pharmacyName} session={session} onLogout={() => setSession(null)} />
         <main className="flex-1 overflow-y-auto chart-paper">
           <div key={location.pathname} className="max-w-[1180px] mx-auto px-8 py-8 page-enter">

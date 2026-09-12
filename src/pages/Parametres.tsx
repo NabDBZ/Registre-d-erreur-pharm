@@ -114,7 +114,7 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
 
       <div className="grid grid-cols-2 gap-5 mb-5">
         <Card className="p-6">
-          <h3 className="kicker text-steel mb-4">Informations de la pharmacie</h3>
+          <h3 className="kicker text-ardoise-500 mb-4">Informations de la pharmacie</h3>
           <form onSubmit={handleSaveInfo}>
             <Field label="Nom de la pharmacie" hint="Affiché dans la barre latérale et les exports.">
               <Input value={nomPharmacie} onChange={(e) => setNomPharmacie(e.target.value)} placeholder="Ex. : Pharmacie Tremblay et associés" />
@@ -123,14 +123,14 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
               <Button type="submit" size="sm">
                 <Save size={15} /> Enregistrer
               </Button>
-              {savedMsg && <span className="text-[13px] text-brand-600">{savedMsg}</span>}
+              {savedMsg && <span className="text-[13px] text-sarcelle-600">{savedMsg}</span>}
             </div>
           </form>
         </Card>
 
         <Card className="p-6">
-          <h3 className="kicker text-steel mb-2">Sauvegarde et restauration</h3>
-          <p className="text-[13px] text-steel mb-4">
+          <h3 className="kicker text-ardoise-500 mb-2">Sauvegarde et restauration</h3>
+          <p className="text-[13px] text-ardoise-500 mb-4">
             Toutes les données sont stockées localement sur cet ordinateur. Faites des copies de sauvegarde régulières sur une clé USB ou un lecteur réseau.
           </p>
           <div className="flex items-center gap-2">
@@ -142,10 +142,10 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
             </Button>
             <input ref={fileInputRef} type="file" accept=".sqlite,.db" className="hidden" onChange={handleFileChosen} />
           </div>
-          {restoreMsg && <p className="text-[12px] text-steel mt-3">{restoreMsg}</p>}
-          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-fog">
-            <History size={14} className="text-steel shrink-0" />
-            <p className="text-[12px] text-steel flex-1">
+          {restoreMsg && <p className="text-[12px] text-ardoise-500 mt-3">{restoreMsg}</p>}
+          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-ligne">
+            <History size={14} className="text-ardoise-500 shrink-0" />
+            <p className="text-[12px] text-ardoise-500 flex-1">
               Une copie automatique est aussi conservée à chaque ouverture de l'application (10 dernières copies gardées).
             </p>
             {window.api && (
@@ -158,8 +158,8 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
       </div>
 
       <Card className="p-6 mb-5">
-        <h3 className="kicker text-steel mb-1">Importer un historique (CSV)</h3>
-        <p className="text-[13px] text-steel mb-4">
+        <h3 className="kicker text-ardoise-500 mb-1">Importer un historique (CSV)</h3>
+        <p className="text-[13px] text-ardoise-500 mb-4">
           Numérisez un registre papier déjà transcrit dans un tableur : utilisez le même format qu'un fichier <strong>Exporter CSV</strong> de cette application
           (mêmes colonnes), et chaque ligne valide devient un nouveau signalement.
         </p>
@@ -171,15 +171,15 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
         </div>
         {resultatImport && (
           <div className="mt-4 text-[13px]">
-            <p className="text-graphite">
-              <strong className="text-ink">{resultatImport.importes}</strong> importé{resultatImport.importes > 1 ? 's' : ''} sur {resultatImport.total} ligne
+            <p className="text-ardoise-700">
+              <strong className="text-encre">{resultatImport.importes}</strong> importé{resultatImport.importes > 1 ? 's' : ''} sur {resultatImport.total} ligne
               {resultatImport.total > 1 ? 's' : ''}
-              {resultatImport.ignores > 0 && <span className="text-hazard-h"> · {resultatImport.ignores} ignorée{resultatImport.ignores > 1 ? 's' : ''}</span>}
+              {resultatImport.ignores > 0 && <span className="text-alerte"> · {resultatImport.ignores} ignorée{resultatImport.ignores > 1 ? 's' : ''}</span>}
             </p>
             {resultatImport.erreurs.length > 0 && (
               <ul className="mt-2 space-y-1 max-h-40 overflow-y-auto">
                 {resultatImport.erreurs.map((e, i) => (
-                  <li key={i} className="text-[12px] text-steel">
+                  <li key={i} className="text-[12px] text-ardoise-500">
                     {e}
                   </li>
                 ))}
@@ -190,8 +190,8 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
       </Card>
 
       <Card className="p-6">
-        <h3 className="kicker text-steel mb-1">Listes personnalisées</h3>
-        <p className="text-[13px] text-steel mb-5">
+        <h3 className="kicker text-ardoise-500 mb-1">Listes personnalisées</h3>
+        <p className="text-[13px] text-ardoise-500 mb-5">
           Adaptez les options des menus déroulants du formulaire de signalement selon votre pratique (communautaire, préparation, spécialisée, hôpital).
         </p>
         <div className="grid grid-cols-2 gap-6">
@@ -209,22 +209,22 @@ export default function Parametres({ onPharmacyNameChange }: { onPharmacyNameCha
       </Card>
 
       <Card className="p-6 mt-5">
-        <h3 className="kicker text-steel mb-4">À propos</h3>
+        <h3 className="kicker text-ardoise-500 mb-4">À propos</h3>
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-md bg-console flex items-center justify-center text-brand-400 shrink-0">
+            <div className="w-10 h-10 rounded-xl2 bg-sarcelle-100 flex items-center justify-center text-sarcelle-600 shrink-0">
               <ShieldCheck size={20} />
             </div>
             <div>
-              <p className="text-[14px] font-bold text-ink">Registre des Incidents Pharmacie</p>
-              <p className="num text-[12px] text-steel">
+              <p className="text-[14px] font-bold text-encre">Registre des Incidents Pharmacie</p>
+              <p className="num text-[12px] text-ardoise-500">
                 Version {appInfo?.version ?? '1.0.0'} · {window.api ? 'Application de bureau' : 'Mode navigateur (développement)'}
               </p>
             </div>
           </div>
           {appInfo?.dbPath && (
             <div className="text-right">
-              <p className="text-[12px] text-steel mb-1.5">Fichier de données local</p>
+              <p className="text-[12px] text-ardoise-500 mb-1.5">Fichier de données local</p>
               <Button variant="secondary" size="sm" onClick={() => window.api?.revealDbFile()}>
                 <FolderOpen size={14} /> Localiser le fichier
               </Button>
@@ -249,13 +249,13 @@ function ListeCategorie({ categorie, label, options, onChanged }: { categorie: s
 
   return (
     <div>
-      <h4 className="text-[13px] font-semibold text-ink mb-2">{label}</h4>
+      <h4 className="text-[13px] font-semibold text-encre mb-2">{label}</h4>
       <div className="flex flex-wrap gap-1.5 mb-3">
         {options.map((o) => (
           <span
             key={o.valeur}
             className={`inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1 rounded-full text-[12px] ${
-              o.actif ? 'bg-mist text-graphite' : 'bg-white text-silver border border-fog line-through'
+              o.actif ? 'bg-ligne text-ardoise-700' : 'bg-white text-ardoise-300 border border-ligne line-through'
             }`}
           >
             {o.valeur}
@@ -265,7 +265,7 @@ function ListeCategorie({ categorie, label, options, onChanged }: { categorie: s
                 setOptionActive(categorie, o.valeur, !o.actif)
                 onChanged()
               }}
-              className="hover:text-hazard-h"
+              className="hover:text-alerte"
               title={o.actif ? 'Désactiver' : 'Réactiver'}
             >
               <X size={12} />

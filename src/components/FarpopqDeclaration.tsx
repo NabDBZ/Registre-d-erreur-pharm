@@ -64,13 +64,13 @@ function Body({
 
   return (
     <div>
-      <p className="text-[13px] text-graphite mb-3">
+      <p className="text-[13px] text-ardoise-700 mb-3">
         Ce résumé est généré à partir du signalement #{evenement.numero}. Relisez-le, corrigez-le au besoin dans le dossier, puis copiez-le dans le
         formulaire de déclaration de l'espace membre du FARPOPQ.
       </p>
 
       <div className="relative">
-        <pre className="text-[12px] text-ink bg-mist border border-fog rounded-md p-3.5 max-h-[280px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
+        <pre className="text-[12px] text-ardoise-900 bg-ligne border border-ligne rounded-xl2 p-3.5 max-h-[280px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
           {resume}
         </pre>
         <Button
@@ -95,14 +95,14 @@ function Body({
 
       <label className="flex items-start gap-2.5 mt-3 cursor-pointer">
         <input type="checkbox" checked={confirme} onChange={(e) => setConfirme(e.target.checked)} className="mt-0.5" />
-        <span className="text-[13px] text-graphite">
+        <span className="text-[13px] text-ardoise-700">
           Je confirme avoir vérifié l'exactitude de ce résumé et j'assume la responsabilité de sa transmission au FARPOPQ.
         </span>
       </label>
 
-      <div className="flex items-start gap-2.5 mt-4 px-3.5 py-2.5 rounded-md border-2 border-signal-amber/40 bg-signal-amber/10">
-        <ShieldAlert size={16} className="text-[#8a5c07] shrink-0 mt-0.5" />
-        <p className="text-[12px] text-[#8a5c07]">
+      <div className="flex items-start gap-2.5 mt-4 px-3.5 py-2.5 rounded-xl2 border-2 border-ambre/40 bg-ambre/10">
+        <ShieldAlert size={16} className="text-[#7a5714] shrink-0 mt-0.5" />
+        <p className="text-[12px] text-[#7a5714]">
           L'application ne transmet rien automatiquement — la déclaration se fait vous-même, dans l'espace membre du FARPOPQ, avec vos propres
           identifiants professionnels.
         </p>

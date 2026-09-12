@@ -5,67 +5,73 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Paper: the clean clinical worksurface (content area)
-        canvas: '#f4f6f4',
+        // Papier: the clean clinical worksurface (content area)
+        papier: '#f5f7f6',
         surface: '#ffffff',
-        mist: '#eef1ef',
-        fog: '#dde3df',
-        ink: '#0d1a16',
-        graphite: '#42544d',
-        steel: '#66786f',
-        silver: '#9caa9f',
-        // Console: the dark control-panel chrome (sidebar / masthead)
-        console: {
-          DEFAULT: '#0b1613',
-          raised: '#122019',
-          line: '#1e2f27',
-          text: '#d7e4dc',
-          dim: '#7d9184'
+        ligne: {
+          DEFAULT: '#dce3e1',
+          forte: '#c3cdca'
         },
-        // Brand: saturated pharmacy green, carried with real weight
-        brand: {
-          50: '#e7f7ee',
-          100: '#c3ecd4',
-          300: '#5ed693',
-          400: '#22c26a',
-          500: '#0f9d53',
-          600: '#0b7d42',
-          700: '#0a6236',
-          900: '#062e1a'
+        ardoise: {
+          900: '#16232a',
+          700: '#3c4c50',
+          500: '#66787a',
+          300: '#9baaaa'
         },
-        // Hazard ladder: diamond severity system (A -> I)
-        hazard: {
-          a: '#0f9d53',
-          b: '#4f9d2f',
-          c: '#a8a415',
-          d: '#d99a06',
-          e1: '#e2790a',
-          e2: '#e35f0e',
-          f: '#dc3d1f',
-          g: '#c0201f',
-          h: '#8f0f1e',
-          i: '#3b0a10'
+        // Encre: the dark control-panel chrome (sidebar / masthead) and heading ink
+        encre: {
+          DEFAULT: '#12262b',
+          600: '#234750',
+          700: '#1b383f'
         },
-        signal: {
-          amber: '#e2a611',
-          red: '#dc2f2f'
+        // Sarcelle: the operational brand accent — buttons, links, focus, active nav
+        sarcelle: {
+          100: '#e3f2ef',
+          DEFAULT: '#0e7c74',
+          600: '#0a6259'
+        },
+        // Argile: one ponctual warm accent — never for state/severity
+        argile: {
+          100: '#f4e6de',
+          DEFAULT: '#b5613f'
+        },
+        // Gravité NCC MERP: the 10-step semantic severity ramp (A -> I) — never reused as a generic accent
+        gravite: {
+          a: '#2f8f6b',
+          b: '#4c9a55',
+          c: '#8b9b2e',
+          d: '#c79a1e',
+          e1: '#d98420',
+          e2: '#d9691e',
+          f: '#cc4a1e',
+          g: '#b93424',
+          h: '#8e1f24',
+          i: '#5c1420'
+        },
+        // Generic (non-severity) status accents — distinct hues from the gravité ramp
+        ambre: {
+          100: '#f5e9d3',
+          DEFAULT: '#c2871e'
+        },
+        alerte: {
+          100: '#f8e3e3',
+          DEFAULT: '#b23b3b'
         }
       },
       fontFamily: {
-        sans: ['Segoe UI Variable', 'Segoe UI', 'ui-sans-serif', 'system-ui', '-apple-system', 'Roboto', 'sans-serif'],
-        mono: ['Cascadia Mono', 'Cascadia Code', 'Consolas', 'ui-monospace', 'SFMono-Regular', 'monospace']
+        sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'Consolas', 'SFMono-Regular', 'monospace']
       },
       boxShadow: {
-        card: '0 1px 2px -1px rgba(9,20,15,0.10), 0 3px 8px -3px rgba(9,20,15,0.10)',
-        pop: '0 8px 24px -6px rgba(9,20,15,0.35), 0 2px 6px -2px rgba(9,20,15,0.20)',
-        console: 'inset -1px 0 0 0 #1e2f27'
+        card: '0 1px 2px rgba(18,38,43,0.06), 0 1px 1px rgba(18,38,43,0.04)',
+        pop: '0 4px 14px rgba(18,38,43,0.10), 0 1px 3px rgba(18,38,43,0.08)',
+        modal: '0 14px 34px rgba(18,38,43,0.16), 0 3px 8px rgba(18,38,43,0.10)'
       },
       borderRadius: {
         xl2: '10px'
       },
       backgroundImage: {
-        chart: 'linear-gradient(to right, rgba(13,26,22,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(13,26,22,0.05) 1px, transparent 1px)',
-        hazardstripe: 'repeating-linear-gradient(135deg, var(--stripe-a, #0d1a16) 0px, var(--stripe-a, #0d1a16) 10px, var(--stripe-b, #e2a611) 10px, var(--stripe-b, #e2a611) 20px)'
+        chart: 'linear-gradient(to right, rgba(18,38,43,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(18,38,43,0.05) 1px, transparent 1px)'
       },
       backgroundSize: {
         chart: '22px 22px'

@@ -219,12 +219,12 @@ export default function EvenementForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      {erreur && <div className="mb-4 text-[13px] font-medium text-hazard-h bg-signal-red/10 border-2 border-signal-red/40 rounded-md px-4 py-2.5">{erreur}</div>}
+      {erreur && <div className="mb-4 text-[13px] font-medium text-alerte bg-alerte/10 border-2 border-alerte/40 rounded-xl2 px-4 py-2.5">{erreur}</div>}
 
       {brouillonPropose && (
-        <div className="flex items-center gap-3 mb-4 px-4 py-3 rounded-md border-2 border-brand-300 bg-brand-50">
-          <FileClock size={17} className="text-brand-700 shrink-0" />
-          <p className="text-[13px] text-brand-700 flex-1">
+        <div className="flex items-center gap-3 mb-4 px-4 py-3 rounded-xl2 border-2 border-sarcelle bg-sarcelle-100">
+          <FileClock size={17} className="text-sarcelle-600 shrink-0" />
+          <p className="text-[13px] text-sarcelle-600 flex-1">
             Un brouillon non enregistré a été trouvé (interrompu le {new Date(brouillonPropose.savedAt).toLocaleString('fr-CA', { dateStyle: 'short', timeStyle: 'short' })}).
           </p>
           <Button type="button" size="sm" onClick={reprendreBrouillon}>
@@ -239,7 +239,7 @@ export default function EvenementForm({
       <div className="grid grid-cols-3 gap-5">
         <div className="col-span-2 space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Contexte de l'événement</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Contexte de l'événement</h3>
             <div className="grid grid-cols-2 gap-x-4">
               <Field label="Date de l'événement" required>
                 <Input type="date" value={dateEvenement} onChange={(e) => setDateEvenement(e.target.value)} required />
@@ -307,8 +307,8 @@ export default function EvenementForm({
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Médicament concerné</h3>
-            <p className="text-[12px] text-steel mb-4 -mt-2">Laissez vide si l'événement n'implique pas un médicament précis (ex. : erreur de livraison, facturation).</p>
+            <h3 className="kicker text-ardoise-500 mb-4">Médicament concerné</h3>
+            <p className="text-[12px] text-ardoise-500 mb-4 -mt-2">Laissez vide si l'événement n'implique pas un médicament précis (ex. : erreur de livraison, facturation).</p>
             <div className="grid grid-cols-2 gap-x-4">
               <Field label="Nom du médicament" hint="Suggestions à partir d'une liste usuelle et des médicaments déjà utilisés ici — vous pouvez toujours saisir un autre nom.">
                 <AutocompleteInput
@@ -343,14 +343,14 @@ export default function EvenementForm({
           </Card>
 
           {semblables.length > 0 && (
-            <Card className={`p-5 ${doublonProbable ? 'border-2 border-hazard-h bg-signal-red/5' : 'border-2 border-signal-amber/50 bg-signal-amber/5'}`}>
+            <Card className={`p-5 ${doublonProbable ? 'border-2 border-alerte bg-alerte/5' : 'border-2 border-ambre/50 bg-ambre/5'}`}>
               <div className="flex items-start gap-2.5 mb-3">
-                {doublonProbable ? <AlertTriangle size={17} className="text-hazard-h shrink-0 mt-0.5" /> : <Info size={17} className="text-[#8a5c07] shrink-0 mt-0.5" />}
+                {doublonProbable ? <AlertTriangle size={17} className="text-alerte shrink-0 mt-0.5" /> : <Info size={17} className="text-[#7a5714] shrink-0 mt-0.5" />}
                 <div>
-                  <h3 className={`text-[13px] font-bold ${doublonProbable ? 'text-hazard-h' : 'text-[#8a5c07]'}`}>
+                  <h3 className={`text-[13px] font-bold ${doublonProbable ? 'text-alerte' : 'text-[#7a5714]'}`}>
                     {doublonProbable ? 'Possible doublon — même type d\'erreur, même date' : 'Événements semblables récents'}
                   </h3>
-                  <p className="text-[12px] text-graphite mt-0.5">
+                  <p className="text-[12px] text-ardoise-700 mt-0.5">
                     {doublonProbable
                       ? "Un signalement identique semble déjà exister pour aujourd'hui. Vérifiez qu'il ne s'agit pas d'une double déclaration avant d'enregistrer."
                       : "Ces signalements partagent le même type d'erreur ou médicament au cours des 90 derniers jours — utile pour repérer une récurrence."}
@@ -363,11 +363,11 @@ export default function EvenementForm({
                     key={s.id}
                     to={`/evenement/${s.id}`}
                     target="_blank"
-                    className="flex items-center gap-2.5 bg-white/70 hover:bg-white rounded-md px-3 py-2 text-[12.5px] transition-colors"
+                    className="flex items-center gap-2.5 bg-white/70 hover:bg-white rounded-xl2 px-3 py-2 text-[12.5px] transition-colors"
                   >
                     <GraviteBadge code={s.gravite} size="sm" />
-                    <span className="text-ink font-semibold">#{s.numero}</span>
-                    <span className="text-graphite truncate flex-1">
+                    <span className="text-encre font-semibold">#{s.numero}</span>
+                    <span className="text-ardoise-700 truncate flex-1">
                       {formatDateCourte(s.date_evenement)} · {s.type_erreur}
                       {s.medicament_nom ? ` · ${s.medicament_nom}` : ''}
                     </span>
@@ -378,7 +378,7 @@ export default function EvenementForm({
           )}
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Description et analyse</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Description et analyse</h3>
             <Field label="Description détaillée de la situation" required>
               <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Que s'est-il passé ? Comment l'erreur a-t-elle été détectée ?" required rows={4} />
             </Field>
@@ -391,8 +391,8 @@ export default function EvenementForm({
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-1">Personnes impliquées</h3>
-            <p className="text-[12px] text-steel mb-4">Sélectionnez dans le répertoire du personnel ou saisissez un nom (ex. : livreur externe).</p>
+            <h3 className="kicker text-ardoise-500 mb-1">Personnes impliquées</h3>
+            <p className="text-[12px] text-ardoise-500 mb-4">Sélectionnez dans le répertoire du personnel ou saisissez un nom (ex. : livreur externe).</p>
             <div className="space-y-3">
               {personnes.map((p) => (
                 <div key={p.key} className="flex items-center gap-2">
@@ -414,7 +414,7 @@ export default function EvenementForm({
                       </option>
                     ))}
                   </Select>
-                  <button type="button" onClick={() => retirerPersonne(p.key)} className="text-steel hover:text-hazard-h px-2 text-lg leading-none">
+                  <button type="button" onClick={() => retirerPersonne(p.key)} className="text-ardoise-500 hover:text-alerte px-2 text-lg leading-none">
                     ×
                   </button>
                 </div>
@@ -428,13 +428,13 @@ export default function EvenementForm({
 
         <div className="space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Gravité de l'événement</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Gravité de l'événement</h3>
             <div className="space-y-1.5 max-h-[360px] overflow-y-auto pr-1">
               {GRAVITES.map((g) => (
                 <label
                   key={g.code}
-                  className={`flex items-start gap-3 p-2.5 rounded-md cursor-pointer border-2 transition-colors ${
-                    gravite === g.code ? 'border-ink bg-mist' : 'border-transparent hover:bg-mist/60'
+                  className={`flex items-start gap-3 p-2.5 rounded-xl2 cursor-pointer border-2 transition-colors ${
+                    gravite === g.code ? 'border-encre bg-ligne' : 'border-transparent hover:bg-ligne/60'
                   }`}
                 >
                   <input type="radio" name="gravite" className="sr-only" checked={gravite === g.code} onChange={() => setGravite(g.code)} />
@@ -445,8 +445,8 @@ export default function EvenementForm({
                     {g.code}
                   </span>
                   <div>
-                    <span className="text-[13px] font-bold text-ink">{g.label}</span>
-                    <p className="text-[12px] text-steel mt-0.5">{g.description}</p>
+                    <span className="text-[13px] font-bold text-encre">{g.label}</span>
+                    <p className="text-[12px] text-ardoise-500 mt-0.5">{g.description}</p>
                   </div>
                 </label>
               ))}
@@ -454,17 +454,17 @@ export default function EvenementForm({
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Patient</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Patient</h3>
             <Field label="Identifiant du patient" hint="Utilisez des initiales ou un numéro de dossier — évitez le nom complet pour protéger la confidentialité.">
               <Input value={patientId} onChange={(e) => setPatientId(e.target.value)} placeholder="Ex. : J.T. — dossier 48213" />
             </Field>
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Divulgation au patient</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Divulgation au patient</h3>
             <label className="flex items-center gap-2 mb-3 cursor-pointer">
               <input type="checkbox" checked={divulgue} onChange={(e) => setDivulgue(e.target.checked)} />
-              <span className="text-[13px] text-graphite">L'événement a été divulgué au patient / à ses proches</span>
+              <span className="text-[13px] text-ardoise-700">L'événement a été divulgué au patient / à ses proches</span>
             </label>
             {divulgue && (
               <div className="space-y-3">
@@ -477,17 +477,17 @@ export default function EvenementForm({
               </div>
             )}
             {graviteSelectionnee.poids >= 4 && !divulgue && (
-              <p className="text-[12px] font-medium text-[#8a5c07] bg-signal-amber/10 border-2 border-signal-amber/40 rounded-md px-3 py-2 mt-1">
+              <p className="text-[12px] font-medium text-[#7a5714] bg-ambre/10 border-2 border-ambre/40 rounded-xl2 px-3 py-2 mt-1">
                 Gravité {graviteSelectionnee.code} : la divulgation au patient est généralement obligatoire selon les standards de l'OPQ.
               </p>
             )}
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Avis à la FARPOPQ</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Avis à la FARPOPQ</h3>
             <label className="flex items-center gap-2 mb-3 cursor-pointer">
               <input type="checkbox" checked={farpopqAvise} onChange={(e) => setFarpopqAvise(e.target.checked)} />
-              <span className="text-[13px] text-graphite">Le Fonds d'assurance responsabilité professionnelle (FARPOPQ) a été avisé</span>
+              <span className="text-[13px] text-ardoise-700">Le Fonds d'assurance responsabilité professionnelle (FARPOPQ) a été avisé</span>
             </label>
             {farpopqAvise && (
               <div className="space-y-3">
@@ -500,7 +500,7 @@ export default function EvenementForm({
               </div>
             )}
             {graviteSelectionnee.poids >= 6 && !farpopqAvise && (
-              <p className="text-[12px] font-medium text-[#8a5c07] bg-signal-amber/10 border-2 border-signal-amber/40 rounded-md px-3 py-2 mt-1">
+              <p className="text-[12px] font-medium text-[#7a5714] bg-ambre/10 border-2 border-ambre/40 rounded-xl2 px-3 py-2 mt-1">
                 Gravité {graviteSelectionnee.code} : envisagez d'aviser la FARPOPQ pour assurer votre couverture en cas de poursuite.
               </p>
             )}

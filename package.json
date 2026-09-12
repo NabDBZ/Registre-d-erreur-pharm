@@ -1,7 +1,7 @@
 {
   "name": "pharma-registre",
   "productName": "Registre des Incidents Pharmacie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Registre de gestion des erreurs et incidents en pharmacie",
   "author": "Registre des Incidents Pharmacie",
   "repository": {

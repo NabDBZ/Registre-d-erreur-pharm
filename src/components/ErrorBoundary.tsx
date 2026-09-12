@@ -34,17 +34,17 @@ export default class ErrorBoundary extends React.Component<Props, State> {
       return (
         <div className="min-h-[60vh] flex items-center justify-center px-6">
           <div className="max-w-md text-center">
-            <div className="hazard-diamond w-12 h-12 mx-auto mb-4 bg-hazard-h flex items-center justify-center">
+            <div className="hazard-diamond w-12 h-12 mx-auto mb-4 bg-alerte flex items-center justify-center">
               <AlertTriangle className="text-white" size={20} />
             </div>
-            <h1 className="text-[18px] font-bold text-ink mb-2">Une erreur inattendue est survenue</h1>
-            <p className="text-[13px] text-steel mb-1">
+            <h1 className="text-[18px] font-bold text-encre mb-2">Une erreur inattendue est survenue</h1>
+            <p className="text-[13px] text-ardoise-500 mb-1">
               Cet écran a rencontré un problème et n'a pas pu s'afficher. Vos données déjà enregistrées ne sont pas affectées.
             </p>
-            <p className="num text-[11px] text-silver mb-5">{this.state.error.message}</p>
+            <p className="num text-[11px] text-ardoise-300 mb-5">{this.state.error.message}</p>
             <button
               onClick={this.handleReset}
-              className="inline-flex items-center gap-2 justify-center font-semibold rounded-md bg-brand-500 text-white hover:bg-brand-600 text-[14px] px-5 py-2.5"
+              className="inline-flex items-center gap-2 justify-center font-semibold rounded-xl2 bg-sarcelle text-white hover:bg-sarcelle-600 text-[14px] px-5 py-2.5"
             >
               Retour au tableau de bord
             </button>

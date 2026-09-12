@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide de marque — Registre des Incidents Pharmacie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --encre: #12262B;
+    --encre-700: #1B383F;
+    --encre-600: #234750;
+    --sarcelle: #0E7C74;
+    --sarcelle-600: #0A6259;
+    --sarcelle-100: #E3F2EF;
+    --argile: #B5613F;
+    --argile-100: #F4E6DE;
+    --papier: #F5F7F6;
+    --surface: #FFFFFF;
+    --ligne: #DCE3E1;
+    --ligne-forte: #C3CDCA;
+    --ardoise-900: #16232A;
+    --ardoise-700: #3C4C50;
+    --ardoise-500: #66787A;
+    --ardoise-300: #9BAAAA;
+    --g-a: #2F8F6B; --g-b: #4C9A55; --g-c: #8B9B2E; --g-d: #C79A1E;
+    --g-e1: #D98420; --g-e2: #D9691E; --g-f: #CC4A1E; --g-g: #B93424;
+    --g-h: #8E1F24; --g-i: #5C1420;
+    --shadow-1: 0 1px 2px rgba(18,38,43,0.06), 0 1px 1px rgba(18,38,43,0.04);
+    --shadow-2: 0 4px 14px rgba(18,38,43,0.10), 0 1px 3px rgba(18,38,43,0.08);
+    --shadow-3: 0 14px 34px rgba(18,38,43,0.16), 0 3px 8px rgba(18,38,43,0.10);
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --radius-l: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--papier);
+    color: var(--ardoise-900);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; }
+  h1, h2, h3, h4 { text-wrap: balance; font-weight: 600; color: var(--encre); margin: 0 0 0.4em; }
+  p { margin: 0 0 1em; max-width: 62ch; }
+  a { color: var(--sarcelle-600); }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--sarcelle-600); margin: 0 0 0.8em;
+  }
+  .section { padding: 88px 8vw 96px; max-width: 1180px; margin: 0 auto; border-top: 1px solid var(--ligne); }
+  .section > .head { max-width: 720px; margin-bottom: 48px; }
+  .lede { font-size: 18px; color: var(--ardoise-700); }
+
+  /* ---- nav ---- */
+  nav.toc {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,247,246,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ligne);
+    display: flex; align-items: center; gap: 22px;
+    padding: 14px 8vw; overflow-x: auto; white-space: nowrap;
+  }
+  nav.toc .brand { font-weight: 700; color: var(--encre); margin-right: 8px; flex-shrink: 0; }
+  nav.toc a { color: var(--ardoise-700); text-decoration: none; font-size: 13.5px; font-weight: 500; }
+  nav.toc a:hover { color: var(--sarcelle); }
+
+  /* ---- cover ---- */
+  .cover {
+    background: radial-gradient(circle at 82% -10%, var(--encre-600), var(--encre) 55%);
+    color: #EAF3F1;
+    padding: 120px 8vw 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: ""; position: absolute; right: -8%; bottom: -30%; width: 560px; height: 560px;
+    border-radius: 50%; border: 1px solid rgba(234,243,241,0.14);
+  }
+  .cover::before {
+    content: ""; position: absolute; right: 6%; bottom: -10%; width: 340px; height: 340px;
+    border-radius: 50%; border: 1px solid rgba(234,243,241,0.10);
+  }
+  .cover .eyebrow { color: var(--sarcelle-100); opacity: .9; }
+  .cover h1 {
+    color: #fff; font-size: clamp(38px, 5.2vw, 64px); line-height: 1.04; letter-spacing: -0.01em;
+    max-width: 15ch; margin-bottom: 22px;
+  }
+  .cover h1 em { font-style: normal; color: var(--argile); border-bottom: 3px solid var(--argile); padding-bottom: 2px; }
+  .cover .lede { color: #C7D9D6; max-width: 52ch; font-size: 19px; }
+  .cover .meta {
+    display: flex; gap: 40px; margin-top: 64px; padding-top: 28px;
+    border-top: 1px solid rgba(234,243,241,0.16); flex-wrap: wrap;
+  }
+  .cover .meta div .k { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #85A6A0; margin-bottom: 5px; }
+  .cover .meta div .v { font-size: 15px; color: #EAF3F1; font-weight: 500; }
+
+  /* ---- reference cards ---- */
+  .ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+  .ref-card { background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); padding: 22px 22px 24px; box-shadow: var(--shadow-1); }
+  .ref-card .name { font-weight: 700; font-size: 16.5px; color: var(--encre); margin-bottom: 2px; }
+  .ref-card .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--sarcelle-600); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; display: block; }
+  .ref-card p { font-size: 14px; color: var(--ardoise-700); margin-bottom: 10px; }
+  .ref-card .borrow { font-size: 13px; color: var(--ardoise-900); background: var(--sarcelle-100); border-radius: var(--radius-s); padding: 8px 11px; }
+  .ref-card .borrow b { color: var(--sarcelle-600); }
+  .note-box {
+    background: var(--argile-100); border: 1px solid #E4C6B4; border-radius: var(--radius-m);
+    padding: 16px 20px; font-size: 13.5px; color: #6B3A24; margin-top: 22px; max-width: 720px;
+  }
+  .note-box b { color: #8E4C2E; }
+
+  /* ---- personality ---- */
+  .trait-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .trait-table th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ardoise-500); padding: 0 16px 10px 0; border-bottom: 1px solid var(--ligne-forte); }
+  .trait-table td { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--ligne); vertical-align: top; font-size: 14.5px; }
+  .trait-table td.trait { font-weight: 600; color: var(--encre); width: 190px; }
+  .trait-table td.yes { color: var(--sarcelle-600); }
+  .trait-table td.no { color: var(--ardoise-500); }
+
+  /* ---- colors ---- */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 8px; }
+  .swatch { border-radius: var(--radius-m); overflow: hidden; border: 1px solid var(--ligne); background: var(--surface); box-shadow: var(--shadow-1); }
+  .swatch .chip { height: 78px; }
+  .swatch .info { padding: 10px 12px 12px; }
+  .swatch .info .name { font-weight: 600; font-size: 13.5px; color: var(--encre); }
+  .swatch .info .hex { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ardoise-500); }
+  .swatch .info .use { font-size: 11.5px; color: var(--ardoise-500); margin-top: 4px; }
+  h3.sub { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--ardoise-500); margin: 40px 0 14px; font-weight: 600; }
+  h3.sub:first-of-type { margin-top: 8px; }
+
+  .ramp { display: flex; border-radius: var(--radius-m); overflow: hidden; border: 1px solid var(--ligne); box-shadow: var(--shadow-1); margin-top: 8px; }
+  .ramp .seg { flex: 1; min-width: 0; padding: 16px 10px 12px; color: #fff; }
+  .ramp .seg .code { font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 15px; }
+  .ramp .seg .lbl { font-size: 10.5px; opacity: .92; margin-top: 20px; line-height: 1.3; }
+  .ramp .seg.dark { color: var(--ardoise-900); }
+
+  /* ---- type specimens ---- */
+  .spec-row { display: flex; align-items: baseline; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--ligne); }
+  .spec-row .lbl { width: 130px; flex-shrink: 0; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ardoise-500); }
+  .spec-row .sample { color: var(--encre); }
+  .type-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 36px; }
+  .type-card { background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); padding: 26px; box-shadow: var(--shadow-1); }
+  .type-card .big { font-size: 46px; line-height: 1; margin-bottom: 10px; color: var(--encre); }
+  .type-card.mono .big { font-family: "IBM Plex Mono", monospace; font-weight: 600; }
+  .type-card .role { font-weight: 600; margin-bottom: 4px; }
+  .type-card .desc { font-size: 13px; color: var(--ardoise-500); }
+  .numerals { font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: .02em; background: var(--ardoise-900); color: #D7E9E6; border-radius: var(--radius-m); padding: 18px 22px; margin-top: 6px; }
+
+  /* ---- grid/spacing ---- */
+  .space-row { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
+  .space-row .bar { background: var(--sarcelle); height: 14px; border-radius: 3px; }
+  .space-row .px { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ardoise-500); width: 90px; }
+  .radius-grid, .elev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+  .radius-box { background: var(--surface); border: 1px solid var(--ligne); height: 90px; display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ardoise-700); }
+  .elev-box { background: var(--surface); height: 90px; border-radius: var(--radius-m); display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ardoise-700); }
+
+  /* ---- icons ---- */
+  .icon-row { display: flex; gap: 34px; align-items: center; flex-wrap: wrap; margin: 18px 0 26px; }
+  .icon-row svg { display: block; }
+  .icon-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; }
+  .icon-rules div { background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); padding: 16px 18px; font-size: 13.5px; color: var(--ardoise-700); }
+  .icon-rules b { color: var(--encre); display: block; margin-bottom: 4px; font-size: 13.5px; }
+
+  /* ---- components ---- */
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .comp-card { background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); padding: 22px; box-shadow: var(--shadow-1); }
+  .comp-card .lbl { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ardoise-500); margin-bottom: 16px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: "IBM Plex Sans"; font-size: 14px; font-weight: 600; border-radius: var(--radius-s); padding: 10px 16px; border: 1px solid transparent; cursor: default; }
+  .btn-primary { background: var(--sarcelle); color: #fff; }
+  .btn-secondary { background: var(--surface); color: var(--encre); border-color: var(--ligne-forte); }
+  .btn-ghost { color: var(--sarcelle-600); }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .field { margin-top: 14px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ardoise-700); margin-bottom: 6px; }
+  .field .input { border: 1px solid var(--ligne-forte); border-radius: var(--radius-s); padding: 10px 12px; font-size: 14px; color: var(--ardoise-900); background: var(--papier); position: relative; }
+  .field .input .ph { color: var(--ardoise-500); }
+  .autocomplete-item { display: flex; justify-content: space-between; padding: 8px 12px; font-size: 13px; border-top: 1px solid var(--ligne); }
+  .autocomplete-item b { color: var(--sarcelle-600); }
+  .autocomplete-item span.dim { color: var(--ardoise-500); font-family: "IBM Plex Mono", monospace; font-size: 11.5px; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; font-family: "IBM Plex Mono", monospace; letter-spacing: .02em; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .kpi-tile { background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); padding: 18px 20px; box-shadow: var(--shadow-1); }
+  .kpi-tile .k { font-size: 12px; color: var(--ardoise-500); margin-bottom: 8px; }
+  .kpi-tile .v { font-size: 30px; font-weight: 700; color: var(--encre); font-family: "IBM Plex Mono", monospace; }
+  .kpi-tile .delta { font-size: 12px; color: var(--sarcelle-600); margin-top: 4px; font-weight: 600; }
+  .table-mini { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .table-mini th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ardoise-500); padding: 8px 10px; border-bottom: 1px solid var(--ligne-forte); }
+  .table-mini td { padding: 9px 10px; border-bottom: 1px solid var(--ligne); color: var(--ardoise-900); }
+  .nav-mini { background: var(--encre); border-radius: var(--radius-m); padding: 12px; display: flex; flex-direction: column; gap: 2px; }
+  .nav-mini .item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: var(--radius-s); font-size: 13px; color: #A9C4C0; }
+  .nav-mini .item.active { background: var(--sarcelle); color: #fff; font-weight: 600; }
+  .nav-mini .dotc { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .8; }
+  .toast-mini { background: var(--encre); color: #EAF3F1; border-radius: var(--radius-m); padding: 13px 16px; font-size: 13px; display: flex; gap: 10px; align-items: flex-start; box-shadow: var(--shadow-2); }
+  .toast-mini .dotc { color: var(--sarcelle); }
+
+  /* ---- tone ---- */
+  .tone-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .tone-box { border-radius: var(--radius-m); padding: 20px 22px; }
+  .tone-box.bad { background: #FBEAEA; border: 1px solid #EFC7C7; }
+  .tone-box.good { background: var(--sarcelle-100); border: 1px solid #BFDFDA; }
+  .tone-box .tag { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; display: block; font-weight: 700; }
+  .tone-box.bad .tag { color: #A23B3B; }
+  .tone-box.good .tag { color: var(--sarcelle-600); }
+  .tone-box p { font-size: 14px; margin: 0; color: var(--ardoise-900); }
+  .principle-list { display: grid; gap: 14px; margin-top: 8px; }
+  .principle-list li { list-style: none; padding: 16px 20px; background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); font-size: 14px; }
+  .principle-list li b { color: var(--encre); }
+
+  /* ---- applied mockups ---- */
+  .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 860px) { .compare-wrap, .tone-compare, .type-cards { grid-template-columns: 1fr; } }
+  .compare-col .tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; display: block; font-weight: 700; }
+  .compare-col.current .tag { color: var(--ardoise-500); }
+  .compare-col.proposed .tag { color: var(--sarcelle-600); }
+  .mock { border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-3); border: 1px solid var(--ligne); }
+  .mock .mtop { display: flex; height: 320px; }
+  .mock.current .mside { width: 68px; background: #1E293B; }
+  .mock.proposed .mside { width: 78px; background: var(--encre); }
+  .mock .mside { padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .mock .mside .sq { width: 26px; height: 26px; border-radius: 7px; background: rgba(255,255,255,0.14); }
+  .mock .mside .sq.on { background: #22C55E; }
+  .mock.proposed .mside .sq.on { background: var(--sarcelle); }
+  .mock .mmain { flex: 1; background: #F1F5F9; padding: 16px; }
+  .mock.proposed .mmain { background: var(--papier); }
+  .mock .mbar { height: 14px; width: 40%; background: #CBD5E1; border-radius: 3px; margin-bottom: 14px; }
+  .mock.proposed .mbar { background: var(--ligne-forte); }
+  .mock .mcards { display: flex; gap: 10px; margin-bottom: 14px; }
+  .mock .mcard { flex: 1; height: 58px; background: #fff; border-radius: 8px; border: 1px solid #E2E8F0; padding: 8px; }
+  .mock .mcard .l1 { width: 60%; height: 8px; background: #22C55E; border-radius: 2px; margin-bottom: 8px; }
+  .mock.proposed .mcard { border-radius: 10px; border-color: var(--ligne); }
+  .mock.proposed .mcard .l1 { background: var(--sarcelle); }
+  .mock .mrow { height: 12px; background: #E2E8F0; border-radius: 3px; margin-bottom: 8px; }
+  .mock .mrow:nth-child(odd) { width: 92%; }
+  .mock .mrow:nth-child(even) { width: 78%; }
+  .mock.proposed .mrow { background: var(--ligne); }
+  .mock .mrows { background: #fff; border-radius: 8px; border: 1px solid #E2E8F0; padding: 12px; }
+  .mock.proposed .mrows { border-color: var(--ligne); border-radius: 10px; }
+  .compare-caption { font-size: 13px; color: var(--ardoise-500); margin-top: 10px; }
+
+  /* ---- next steps ---- */
+  .steps { counter-reset: step; display: grid; gap: 14px; margin-top: 8px; }
+  .steps li { list-style: none; display: flex; gap: 16px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--radius-m); }
+  .steps li::before { counter-increment: step; content: counter(step); font-family: "IBM Plex Mono", monospace; font-weight: 700; color: var(--sarcelle-600); background: var(--sarcelle-100); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 13px; }
+  .steps li .t { font-weight: 600; color: var(--encre); margin-bottom: 3px; }
+  .steps li .d { font-size: 13.5px; color: var(--ardoise-700); }
+
+  footer { padding: 46px 8vw 60px; color: var(--ardoise-500); font-size: 12.5px; border-top: 1px solid var(--ligne); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  @media print {
+    nav.toc { display: none; }
+    .section { padding: 34px 0 40px; break-inside: avoid-page; page-break-after: auto; }
+    .cover { page-break-after: always; padding: 70px 48px; }
+    body { font-size: 12.5px; }
+    a { text-decoration: none; color: inherit; }
+    .section { max-width: 100%; padding-left: 48px; padding-right: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="toc">
+  <span class="brand mono">RIP · Guide de marque</span>
+  <a href="#methode">Méthode</a>
+  <a href="#references">Références</a>
+  <a href="#personnalite">Personnalité</a>
+  <a href="#couleurs">Couleurs</a>
+  <a href="#typographie">Typographie</a>
+  <a href="#grille">Grille</a>
+  <a href="#icones">Icônes</a>
+  <a href="#composants">Composants</a>
+  <a href="#ton">Ton</a>
+  <a href="#application">Application</a>
+  <a href="#suite">Prochaines étapes</a>
+</nav>
+
+<header class="cover" id="cover">
+  <div class="eyebrow mono">Guide de marque — Proposition v1 · Septembre 2026</div>
+  <h1>Registre des Incidents Pharmacie, <em>redessiné</em>.</h1>
+  <p class="lede">Un système visuel pensé pour la pharmacienne-chef qui déclare un événement entre deux patients : rigoureux comme un dossier clinique, rapide comme un outil de travail, jamais anxiogène malgré son sujet.</p>
+  <div class="meta">
+    <div><div class="k">Portée</div><div class="v">Identité visuelle + système de composants</div></div>
+    <div><div class="k">Fonctionnalité</div><div class="v">Inchangée — habillage seulement</div></div>
+    <div><div class="k">Usage</div><div class="v">Base de référence pour la refonte à venir</div></div>
+    <div><div class="k">Langue</div><div class="v">Français (Québec), interface principale</div></div>
+  </div>
+</header>
+
+<section class="section" id="methode">
+  <div class="head">
+    <div class="eyebrow">01 — Méthode</div>
+    <h2>D'où vient cette proposition</h2>
+    <p class="lede">L'objectif : sortir du look « application interne par défaut » (police système, vert générique, cartes sans hiérarchie) pour un système aussi crédible que les meilleurs outils de données B2B, tout en gardant le sérieux clinique attendu d'un registre d'incidents pharmaceutiques.</p>
+  </div>
+  <p>La recherche d'inspiration sur Mobbin (outil de référence pour l'UI de produits réels) n'a pas pu être exécutée dans cette session — l'accès à la recherche d'écrans y est réservé aux comptes payants. La proposition ci-dessous s'appuie donc directement sur le langage visuel public et documenté des produits de référence listés en <a href="#references">section 2</a>, choisis pour leur proximité fonctionnelle avec le Registre : données denses, formulaires fréquents, fiches détaillées, utilisation professionnelle quotidienne.</p>
+  <div class="note-box"><b>Pour aller plus loin :</b> si un abonnement Mobbin est activé plus tard, les mêmes catégories de recherche restent valables : <span class="mono">Dashboard</span>, <span class="mono">Admin panel / Internal tools</span>, <span class="mono">Data table</span>, <span class="mono">Forms</span>, <span class="mono">Settings</span>, <span class="mono">Empty states</span>, ainsi que les fiches des applications nommées ci-dessous.</div>
+</section>
+
+<section class="section" id="references">
+  <div class="head">
+    <div class="eyebrow">02 — Références étudiées</div>
+    <h2>Ce qu'on emprunte, et à qui</h2>
+    <p class="lede">Cinq produits qui résolvent le même problème que le Registre : rendre des données professionnelles denses rapides à scanner, à remplir et à faire confiance.</p>
+  </div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="name">Linear</div>
+      <span class="tag">Suivi de tickets — B2B</span>
+      <p>Tables et listes très denses qui restent lisibles grâce à une hiérarchie typographique stricte et une couleur utilisée avec parcimonie sur fond neutre.</p>
+      <div class="borrow"><b>On emprunte :</b> la discipline — un seul accent de couleur, tout le reste en encre et gris ardoisé.</div>
+    </div>
+    <div class="ref-card">
+      <div class="name">Stripe Dashboard</div>
+      <span class="tag">Données financières</span>
+      <p>Cartes de KPI avec chiffres en avant, tendance en petit texte, et graphiques discrets. Aucune donnée n'est décorative.</p>
+      <div class="borrow"><b>On emprunte :</b> la structure des cartes de synthèse du Tableau de bord et des Statistiques.</div>
+    </div>
+    <div class="ref-card">
+      <div class="name">Attio</div>
+      <span class="tag">Fiches d'enregistrement</span>
+      <p>Vue « fiche » avec panneau latéral plutôt que changement de page complet — on garde le contexte de la liste en modifiant un enregistrement.</p>
+      <div class="borrow"><b>On emprunte :</b> le concept de panneau pour la Fiche d'un signalement, en alternative à la page pleine actuelle.</div>
+    </div>
+    <div class="ref-card">
+      <div class="name">Retool / Airtable</div>
+      <span class="tag">Outils internes</span>
+      <p>Vocabulaire visuel des outils « métier » : badges de statut, champs de formulaire compacts, autocomplétion avec aperçu de la valeur choisie.</p>
+      <div class="borrow"><b>On emprunte :</b> le style des badges de gravité et de la recherche assistée de médicament.</div>
+    </div>
+    <div class="ref-card">
+      <div class="name">Notion</div>
+      <span class="tag">Documents structurés</span>
+      <p>Typographie généreuse en lecture, structure claire par sections, icônes discrètes qui guident sans décorer.</p>
+      <div class="borrow"><b>On emprunte :</b> le traitement du Journal d'audit et de la Déclaration FARPOPQ, pensés comme des documents.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="personnalite">
+  <div class="head">
+    <div class="eyebrow">03 — Personnalité de marque</div>
+    <h2>Comment le Registre doit se sentir</h2>
+  </div>
+  <table class="trait-table">
+    <tr><th>Trait</th><th>On est</th><th>On n'est pas</th></tr>
+    <tr><td class="trait">Rigueur clinique</td><td class="yes">Précis, structuré, traçable — chaque champ a une raison d'être.</td><td class="no">Froid comme un formulaire administratif, ni punitif dans le ton.</td></tr>
+    <tr><td class="trait">Calme</td><td class="yes">Palette sobre même dans les zones de gravité élevée.</td><td class="no">Alarmiste — pas de rouge clignotant, pas de ton d'urgence permanent.</td></tr>
+    <tr><td class="trait">Efficacité</td><td class="yes">Optimisé pour la saisie rapide entre deux patients.</td><td class="no">Ludique ou « produit grand public » — pas d'animation gratuite.</td></tr>
+    <tr><td class="trait">Confiance</td><td class="yes">Chaque donnée sensible est visiblement protégée et horodatée.</td><td class="no">Générique — pas un habillage SaaS interchangeable avec n'importe quel produit.</td></tr>
+    <tr><td class="trait">Sur mesure</td><td class="yes">Vocabulaire et repères du milieu pharmaceutique québécois (OPQ, MSSS, NCC MERP).</td><td class="no">Traduit — jamais une interface anglaise habillée en français.</td></tr>
+  </table>
+</section>
+
+<section class="section" id="couleurs">
+  <div class="head">
+    <div class="eyebrow">04 — Palette de couleurs</div>
+    <h2>Encre, sarcelle et argile</h2>
+    <p class="lede">Un fond neutre à dominante ardoise-teintée (plus clinique qu'un blanc pur), une couleur de marque — la sarcelle — réservée aux actions et à l'accent, et l'argile utilisée seule, avec parcimonie, pour un point chaud de personnalité.</p>
+  </div>
+
+  <h3 class="sub">Marque</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="chip" style="background:var(--encre)"></div><div class="info"><div class="name">Encre</div><div class="hex">#12262B</div><div class="use">Fond de navigation, titres, mode sombre</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--sarcelle)"></div><div class="info"><div class="name">Sarcelle</div><div class="hex">#0E7C74</div><div class="use">Boutons primaires, liens, focus</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--sarcelle-600)"></div><div class="info"><div class="name">Sarcelle foncé</div><div class="hex">#0A6259</div><div class="use">États survol / actif</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--argile)"></div><div class="info"><div class="name">Argile</div><div class="hex">#B5613F</div><div class="use">Accent ponctuel, jamais pour l'état ou l'erreur</div></div></div>
+  </div>
+
+  <h3 class="sub">Neutres</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="chip" style="background:var(--papier)"></div><div class="info"><div class="name">Papier</div><div class="hex">#F5F7F6</div><div class="use">Fond de page</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--surface); border-bottom:1px solid var(--ligne)"></div><div class="info"><div class="name">Surface</div><div class="hex">#FFFFFF</div><div class="use">Cartes, tableaux, modales</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--ligne)"></div><div class="info"><div class="name">Ligne</div><div class="hex">#DCE3E1</div><div class="use">Bordures, séparateurs</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--ardoise-700)"></div><div class="info"><div class="name">Ardoise 700</div><div class="hex">#3C4C50</div><div class="use">Texte secondaire</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--ardoise-500)"></div><div class="info"><div class="name">Ardoise 500</div><div class="hex">#66787A</div><div class="use">Texte tertiaire, légendes</div></div></div>
+    <div class="swatch"><div class="chip" style="background:var(--ardoise-900)"></div><div class="info"><div class="name">Ardoise 900</div><div class="hex">#16232A</div><div class="use">Texte principal sur papier</div></div></div>
+  </div>
+
+  <h3 class="sub">Gravité NCC MERP — échelle sémantique (indépendante de la marque)</h3>
+  <p style="max-width:720px">Réservée exclusivement au niveau de gravité d'un événement (A à I). Ne jamais réutiliser ces teintes pour un bouton, un lien ou un état de succès générique — la couleur doit rester un signal fiable, reconnu d'un coup d'œil dans le Registre et les Statistiques.</p>
+  <div class="ramp">
+    <div class="seg" style="background:var(--g-a)"><div class="code">A</div><div class="lbl">Situation à risque</div></div>
+    <div class="seg" style="background:var(--g-b)"><div class="code">B</div><div class="lbl">Échappée belle</div></div>
+    <div class="seg dark" style="background:var(--g-c)"><div class="code">C</div><div class="lbl">Sans conséquence</div></div>
+    <div class="seg dark" style="background:var(--g-d)"><div class="code">D</div><div class="lbl">Surveillance requise</div></div>
+    <div class="seg" style="background:var(--g-e1)"><div class="code">E1</div><div class="lbl">Conséquence mineure</div></div>
+    <div class="seg" style="background:var(--g-e2)"><div class="code">E2</div><div class="lbl">Soins spécialisés</div></div>
+    <div class="seg" style="background:var(--g-f)"><div class="code">F</div><div class="lbl">Hospitalisation</div></div>
+    <div class="seg" style="background:var(--g-g)"><div class="code">G</div><div class="lbl">Conséquence permanente</div></div>
+    <div class="seg" style="background:var(--g-h)"><div class="code">H</div><div class="lbl">Danger vital</div></div>
+    <div class="seg" style="background:var(--g-i)"><div class="code">I</div><div class="lbl">Décès</div></div>
+  </div>
+</section>
+
+<section class="section" id="typographie">
+  <div class="head">
+    <div class="eyebrow">05 — Typographie</div>
+    <h2>IBM Plex Sans + IBM Plex Mono</h2>
+    <p class="lede">Un duo dessiné pour l'écriture de données, pas pour un site vitrine : excellent support du français, chiffres tabulaires natifs pour aligner les DIN et les dates, et un caractère technique cohérent avec un registre réglementaire.</p>
+  </div>
+  <div class="type-cards">
+    <div class="type-card">
+      <div class="big" style="font-weight:700">Aa Éé Çç 12</div>
+      <div class="role">IBM Plex Sans — Interface &amp; titres</div>
+      <div class="desc">400 à 700. Utilisée pour tout le texte de l'application, des titres de page aux libellés de champ.</div>
+    </div>
+    <div class="type-card mono">
+      <div class="big">01A2 3F</div>
+      <div class="role">IBM Plex Mono — Données &amp; repères</div>
+      <div class="desc">Codes DIN, dates, montants, étiquettes de section (eyebrow), extraits du journal d'audit.</div>
+    </div>
+  </div>
+  <div class="spec-row"><div class="lbl">Titre — 32/600</div><div class="sample" style="font-size:32px;font-weight:600">Signalement d'un événement</div></div>
+  <div class="spec-row"><div class="lbl">Sous-titre — 20/600</div><div class="sample" style="font-size:20px;font-weight:600">Circonstances et mesures correctives</div></div>
+  <div class="spec-row"><div class="lbl">Corps — 15/400</div><div class="sample" style="font-size:15px">Un événement a été détecté avant d'atteindre le patient et a été corrigé sans conséquence.</div></div>
+  <div class="spec-row"><div class="lbl">Légende — 13/500</div><div class="sample" style="font-size:13px;font-weight:500;color:var(--ardoise-500)">Modifié le 11 sept. 2026 à 14 h 32 par M. Tremblay</div></div>
+  <div class="spec-row"><div class="lbl">Étiquette — mono</div><div class="sample mono" style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sarcelle-600)">Gravité · Catégorie · Statut</div></div>
+  <p style="margin-top:26px;font-weight:600;color:var(--encre)">Chiffres tabulaires pour toute colonne numérique</p>
+  <div class="numerals">DIN 02176397 — 12/09/2026 — 850 mg — #A0231</div>
+</section>
+
+<section class="section" id="grille">
+  <div class="head">
+    <div class="eyebrow">06 — Grille &amp; espacement</div>
+    <h2>Une base de 8 px, sans exception</h2>
+  </div>
+  <div class="space-row"><div class="bar" style="width:4px"></div><div class="px">4 px</div><span style="font-size:13px;color:var(--ardoise-500)">Entre une icône et son libellé</span></div>
+  <div class="space-row"><div class="bar" style="width:8px"></div><div class="px">8 px</div><span style="font-size:13px;color:var(--ardoise-500)">Intérieur d'un badge</span></div>
+  <div class="space-row"><div class="bar" style="width:16px"></div><div class="px">16 px</div><span style="font-size:13px;color:var(--ardoise-500)">Entre deux champs de formulaire</span></div>
+  <div class="space-row"><div class="bar" style="width:24px"></div><div class="px">24 px</div><span style="font-size:13px;color:var(--ardoise-500)">Padding intérieur d'une carte</span></div>
+  <div class="space-row"><div class="bar" style="width:40px"></div><div class="px">40 px</div><span style="font-size:13px;color:var(--ardoise-500)">Entre deux sections d'une fiche</span></div>
+  <div class="space-row"><div class="bar" style="width:64px"></div><div class="px">64 px</div><span style="font-size:13px;color:var(--ardoise-500)">Entre deux blocs majeurs de page</span></div>
+
+  <h3 class="sub">Rayons</h3>
+  <div class="radius-grid">
+    <div class="radius-box" style="border-radius:6px">6 px — champs, badges</div>
+    <div class="radius-box" style="border-radius:10px">10 px — cartes, boutons</div>
+    <div class="radius-box" style="border-radius:16px">16 px — modales, panneaux</div>
+  </div>
+  <h3 class="sub">Élévation</h3>
+  <div class="elev-grid">
+    <div class="elev-box" style="box-shadow:var(--shadow-1)">Niveau 1 — carte au repos</div>
+    <div class="elev-box" style="box-shadow:var(--shadow-2)">Niveau 2 — menu, survol</div>
+    <div class="elev-box" style="box-shadow:var(--shadow-3)">Niveau 3 — modale, toast</div>
+  </div>
+</section>
+
+<section class="section" id="icones">
+  <div class="head">
+    <div class="eyebrow">07 — Iconographie</div>
+    <h2>Lucide, trait 1.75, jamais rempli</h2>
+    <p class="lede">La bibliothèque d'icônes déjà en place (Lucide) est conservée — cohérente, sobre, disponible en React. On formalise seulement la manière de s'en servir.</p>
+  </div>
+  <div class="icon-row">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M4.93 4.93l2.83 2.83M2 12h4M4.93 19.07l2.83-2.83M12 18v4M16.24 16.24l2.83 2.83M18 12h4M16.24 7.76l2.83-2.83"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E7C74" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M9 8h1"/><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+  </div>
+  <div class="icon-rules">
+    <div><b>Taille</b>16 px en ligne de texte, 20 px dans la navigation, jamais plus de 24 px sauf état vide.</div>
+    <div><b>Couleur</b>Hérite du texte environnant ; la sarcelle uniquement pour une icône interactive ou sélectionnée.</div>
+    <div><b>Trait</b>1.75 constant — jamais de mélange filled/outline sur un même écran.</div>
+    <div><b>Rôle</b>Toujours accompagnée d'un libellé texte, sauf dans la barre d'outils compacte d'un tableau.</div>
+  </div>
+</section>
+
+<section class="section" id="composants">
+  <div class="head">
+    <div class="eyebrow">08 — Composants clés</div>
+    <h2>Le vocabulaire d'interface</h2>
+  </div>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="lbl">Boutons</div>
+      <div class="btn-row">
+        <span class="btn btn-primary">Déclarer un événement</span>
+        <span class="btn btn-secondary">Exporter</span>
+        <span class="btn btn-ghost">Annuler</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="lbl">Champ + autocomplétion médicament</div>
+      <div class="field">
+        <label>Médicament en cause</label>
+        <div class="input">Metfor<span class="ph">min...</span></div>
+      </div>
+      <div class="autocomplete-item"><span><b>Metformine</b> 850 mg — Apo</span><span class="dim">DIN 02245549</span></div>
+      <div class="autocomplete-item"><span>Metformine 500 mg — Teva</span><span class="dim">DIN 02240391</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="lbl">Badges de gravité &amp; statut</div>
+      <div class="badge-row">
+        <span class="badge" style="background:var(--g-a);color:#fff"><span class="dot"></span>A · Risque</span>
+        <span class="badge" style="background:var(--g-e1);color:#fff"><span class="dot"></span>E1 · Mineure</span>
+        <span class="badge" style="background:var(--g-h);color:#fff"><span class="dot"></span>H · Danger vital</span>
+        <span class="badge" style="background:var(--sarcelle-100);color:var(--sarcelle-600)"><span class="dot"></span>Archivé</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="lbl">Carte KPI — Tableau de bord</div>
+      <div class="kpi-tile">
+        <div class="k">Signalements — 30 derniers jours</div>
+        <div class="v">47</div>
+        <div class="delta">↓ 12 % vs période précédente</div>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="lbl">Rangée de tableau — Registre</div>
+      <table class="table-mini">
+        <tr><th>Date</th><th>Médicament</th><th>Gravité</th><th>Statut</th></tr>
+        <tr><td class="mono">11/09/2026</td><td>Metformine 850 mg</td><td><span class="badge" style="background:var(--g-b);color:#fff">B</span></td><td>Ouvert</td></tr>
+        <tr><td class="mono">08/09/2026</td><td>Amoxicilline 500 mg</td><td><span class="badge" style="background:var(--g-d);color:#fff">D</span></td><td>Clos</td></tr>
+      </table>
+    </div>
+    <div class="comp-card">
+      <div class="lbl">Navigation</div>
+      <div class="nav-mini">
+        <div class="item active"><span class="dotc"></span>Tableau de bord</div>
+        <div class="item"><span class="dotc"></span>Registre</div>
+        <div class="item"><span class="dotc"></span>Statistiques</div>
+        <div class="item"><span class="dotc"></span>Journal d'audit</div>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="lbl">Notification (toast)</div>
+      <div class="toast-mini"><span class="dotc">●</span><div>Signalement #A0231 enregistré et sauvegardé automatiquement.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ton">
+  <div class="head">
+    <div class="eyebrow">09 — Ton et rédaction</div>
+    <h2>Comment le Registre parle</h2>
+    <p class="lede">Vouvoiement systématique, phrases courtes, jamais de blâme. Le texte décrit un fait et une action possible — jamais une faute.</p>
+  </div>
+  <ul class="principle-list">
+    <li><b>Vouvoiement constant.</b> Aucun tutoiement, même dans les messages ludiques (palette de commandes, états vides).</li>
+    <li><b>Verbes d'action à l'infinitif</b> pour les boutons : « Déclarer », « Archiver », « Restaurer » — jamais « Vous pouvez déclarer ici ».</li>
+    <li><b>Un message d'erreur nomme le champ et la correction attendue</b> — jamais un code technique seul.</li>
+    <li><b>Aucun vocabulaire de faute individuelle.</b> On dit « événement » et « circonstance », jamais « erreur de X » dans l'interface.</li>
+  </ul>
+  <div class="tone-compare" style="margin-top:26px">
+    <div class="tone-box bad"><span class="tag">À éviter</span><p>« Erreur : champ requis manquant. »</p></div>
+    <div class="tone-box good"><span class="tag">Registre</span><p>« Indiquez la gravité de l'événement pour continuer. »</p></div>
+  </div>
+</section>
+
+<section class="section" id="application">
+  <div class="head">
+    <div class="eyebrow">10 — Aperçu appliqué</div>
+    <h2>Tableau de bord — avant / après</h2>
+    <p class="lede">Même contenu, même fonctionnalité, même hiérarchie d'information. Ce qui change : la police système remplacée par Plex, le vert générique remplacé par la sarcelle, une seule couleur d'accent au lieu de plusieurs verts non coordonnés.</p>
+  </div>
+  <div class="compare-wrap">
+    <div class="compare-col current">
+      <span class="tag">Actuel</span>
+      <div class="mock current">
+        <div class="mtop">
+          <div class="mside"><div class="sq on"></div><div class="sq"></div><div class="sq"></div><div class="sq"></div></div>
+          <div class="mmain">
+            <div class="mbar"></div>
+            <div class="mcards"><div class="mcard"><div class="l1"></div></div><div class="mcard"><div class="l1"></div></div><div class="mcard"><div class="l1"></div></div></div>
+            <div class="mrows"><div class="mrow"></div><div class="mrow"></div><div class="mrow"></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="compare-caption">Police système, vert saturé sans hiérarchie, cartes plates sans distinction d'importance.</p>
+    </div>
+    <div class="compare-col proposed">
+      <span class="tag">Proposition</span>
+      <div class="mock proposed">
+        <div class="mtop">
+          <div class="mside"><div class="sq on"></div><div class="sq"></div><div class="sq"></div><div class="sq"></div></div>
+          <div class="mmain">
+            <div class="mbar"></div>
+            <div class="mcards"><div class="mcard"><div class="l1"></div></div><div class="mcard"><div class="l1"></div></div><div class="mcard"><div class="l1"></div></div></div>
+            <div class="mrows"><div class="mrow"></div><div class="mrow"></div><div class="mrow"></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="compare-caption">Encre + sarcelle, fond ardoise-teinté, un seul accent qui guide l'œil vers l'action principale.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="suite">
+  <div class="head">
+    <div class="eyebrow">11 — Prochaines étapes</div>
+    <h2>De ce guide au nouveau Registre</h2>
+  </div>
+  <ol class="steps">
+    <li><div><div class="t">Valider la direction</div><div class="d">Revoir ce guide, confirmer la palette et le duo typographique avant tout code.</div></div></li>
+    <li><div><div class="t">Générer le design system Claude</div><div class="d">Transformer ces jetons (couleurs, typographie, espacement) en variables Tailwind / CSS pour l'application.</div></div></li>
+    <li><div><div class="t">Refondre écran par écran</div><div class="d">Tableau de bord, Registre, Fiche, Déclaration — en conservant chaque fonctionnalité existante telle quelle.</div></div></li>
+    <li><div><div class="t">Vérifier l'accessibilité</div><div class="d">Contrastes AA sur toute la palette de gravité, focus clavier visible, tailles de cible tactile.</div></div></li>
+  </ol>
+</section>
+
+<footer>
+  <span>Registre des Incidents Pharmacie — Guide de marque, proposition v1</span>
+  <span class="mono">Document de travail interne — non destiné aux utilisateurs finaux</span>
+</footer>
+
+</body>
+</html>

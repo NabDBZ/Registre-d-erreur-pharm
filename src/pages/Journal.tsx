@@ -87,7 +87,7 @@ export default function Journal() {
           <div className="overflow-x-auto">
             <table className="w-full text-[13px] min-w-[760px]">
               <thead>
-                <tr className="text-left bg-console text-console-dim">
+                <tr className="text-left bg-papier text-ardoise-500 border-b border-ligne-forte">
                   <th className="px-4 py-3 kicker font-bold">Date et heure</th>
                   <th className="px-4 py-3 kicker font-bold">Utilisateur</th>
                   <th className="px-4 py-3 kicker font-bold">Action</th>
@@ -100,28 +100,28 @@ export default function Journal() {
                   const info = actionInfo(e.action)
                   const contenu = (
                     <>
-                      <td className="px-4 py-3 num text-graphite whitespace-nowrap">
+                      <td className="px-4 py-3 num text-ardoise-700 whitespace-nowrap">
                         {formatDateLongue(e.horodatage.slice(0, 10))} · {e.horodatage.slice(11, 16)}
                       </td>
-                      <td className="px-4 py-3 text-ink font-medium whitespace-nowrap">{e.utilisateur_nom}</td>
+                      <td className="px-4 py-3 text-encre font-medium whitespace-nowrap">{e.utilisateur_nom}</td>
                       <td className="px-4 py-3">
                         <Badge tone={info.tone}>{info.label}</Badge>
                       </td>
-                      <td className="px-4 py-3 text-graphite whitespace-nowrap">{e.cible_libelle || '—'}</td>
-                      <td className="px-4 py-3 text-steel">{e.details || '—'}</td>
+                      <td className="px-4 py-3 text-ardoise-700 whitespace-nowrap">{e.cible_libelle || '—'}</td>
+                      <td className="px-4 py-3 text-ardoise-500">{e.details || '—'}</td>
                     </>
                   )
                   return e.cible_type === 'evenement' && e.cible_id ? (
-                    <tr key={e.id} className="border-b border-fog last:border-0 hover:bg-mist/60 transition-colors">
+                    <tr key={e.id} className="border-b border-ligne last:border-0 hover:bg-ligne/60 transition-colors">
                       {contenu}
                       <td className="px-2">
-                        <Link to={`/evenement/${e.cible_id}`} className="text-[12px] text-brand-600 font-semibold hover:underline whitespace-nowrap">
+                        <Link to={`/evenement/${e.cible_id}`} className="text-[12px] text-sarcelle-600 font-semibold hover:underline whitespace-nowrap">
                           Voir →
                         </Link>
                       </td>
                     </tr>
                   ) : (
-                    <tr key={e.id} className="border-b border-fog last:border-0">
+                    <tr key={e.id} className="border-b border-ligne last:border-0">
                       {contenu}
                       <td />
                     </tr>

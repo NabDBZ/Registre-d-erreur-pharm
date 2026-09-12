@@ -52,7 +52,7 @@ function PadBody({ onClose, onConfirm, nomSignataire }: { onClose: () => void; o
     if (!c) return
     const { x, y } = pointerPos(e)
     c.lineTo(x, y)
-    c.strokeStyle = '#14201c'
+    c.strokeStyle = '#12262b'
     c.lineWidth = 2.2
     c.lineCap = 'round'
     c.lineJoin = 'round'
@@ -82,11 +82,11 @@ function PadBody({ onClose, onConfirm, nomSignataire }: { onClose: () => void; o
 
   return (
     <div>
-      <p className="text-[13px] text-graphite mb-1">
-        <strong className="text-ink">{nomSignataire}</strong> confirme, par cette signature, avoir pris connaissance de ce signalement.
+      <p className="text-[13px] text-ardoise-700 mb-1">
+        <strong className="text-encre">{nomSignataire}</strong> confirme, par cette signature, avoir pris connaissance de ce signalement.
       </p>
-      <p className="text-[12px] text-steel mb-4">Signez avec la souris, le doigt ou un stylet dans le cadre ci-dessous.</p>
-      <div className="border-2 border-fog rounded-md bg-white overflow-hidden" style={{ touchAction: 'none' }}>
+      <p className="text-[12px] text-ardoise-500 mb-4">Signez avec la souris, le doigt ou un stylet dans le cadre ci-dessous.</p>
+      <div className="border-2 border-ligne-forte rounded-xl2 bg-white overflow-hidden" style={{ touchAction: 'none' }}>
         <canvas
           ref={canvasRef}
           width={440}
@@ -100,10 +100,10 @@ function PadBody({ onClose, onConfirm, nomSignataire }: { onClose: () => void; o
         />
       </div>
       <div className="flex items-center justify-between mt-2">
-        <button type="button" onClick={clear} className="flex items-center gap-1.5 text-[12px] text-steel hover:text-hazard-h">
+        <button type="button" onClick={clear} className="flex items-center gap-1.5 text-[12px] text-ardoise-500 hover:text-alerte">
           <Eraser size={13} /> Effacer
         </button>
-        <span className="text-[11px] text-silver">Sera horodaté automatiquement</span>
+        <span className="text-[11px] text-ardoise-300">Sera horodaté automatiquement</span>
       </div>
       <div className="flex justify-end gap-2 mt-5">
         <Button type="button" variant="secondary" onClick={onClose}>

@@ -43,7 +43,7 @@ function filtrerParPeriode(evenements: ReturnType<typeof listEvenements>, period
   return evenements
 }
 
-function HBar({ data, dataKeyLabel = 'cle', color = '#0f9d53' }: { data: { cle: string; total: number }[]; dataKeyLabel?: string; color?: string }) {
+function HBar({ data, dataKeyLabel = 'cle', color = '#0e7c74' }: { data: { cle: string; total: number }[]; dataKeyLabel?: string; color?: string }) {
   const top = data.slice(0, 8)
   return (
     <ResponsiveContainer width="100%" height={Math.max(160, top.length * 34)}>
@@ -53,11 +53,11 @@ function HBar({ data, dataKeyLabel = 'cle', color = '#0f9d53' }: { data: { cle: 
           dataKey={dataKeyLabel}
           type="category"
           width={190}
-          tick={{ fontSize: 12, fill: '#42544d', fontWeight: 600 }}
+          tick={{ fontSize: 12, fill: '#3c4c50', fontWeight: 600 }}
           axisLine={false}
           tickLine={false}
         />
-        <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #0d1a16', fontSize: 13 }} />
+        <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #12262b', fontSize: 13 }} />
         <Bar dataKey="total" radius={[0, 2, 2, 0]} fill={color} />
       </BarChart>
     </ResponsiveContainer>
@@ -120,7 +120,7 @@ export default function Statistiques() {
 
       <Card className="p-4 mb-6 no-print">
         <div className="flex items-center gap-3 flex-wrap">
-          <span className="text-[13px] font-medium text-graphite">Période :</span>
+          <span className="text-[13px] font-medium text-ardoise-700">Période :</span>
           <Select className="w-52" value={periode} onChange={(e) => setPeriode(e.target.value as Periode)}>
             <option value="12mois">12 derniers mois</option>
             <option value="annee">Année en cours</option>
@@ -131,14 +131,14 @@ export default function Statistiques() {
           {periode === 'personnalise' && (
             <>
               <Input type="date" value={debut} onChange={(e) => setDebut(e.target.value)} className="w-40" />
-              <span className="text-steel">→</span>
+              <span className="text-ardoise-500">→</span>
               <Input type="date" value={fin} onChange={(e) => setFin(e.target.value)} className="w-40" />
             </>
           )}
-          <span className="ml-auto flex items-center gap-3 text-[13px] text-steel">
+          <span className="ml-auto flex items-center gap-3 text-[13px] text-ardoise-500">
             <span>{evenements.length} événements · {incidents} incidents · {accidents} accidents</span>
             {delaiMoyen != null && (
-              <span className="flex items-center gap-1.5 font-semibold text-graphite bg-mist rounded-full px-3 py-1">
+              <span className="flex items-center gap-1.5 font-semibold text-ardoise-700 bg-ligne rounded-full px-3 py-1">
                 <Clock size={13} /> Délai moyen de résolution : <span className="num">{delaiMoyen}</span> j
               </span>
             )}
@@ -147,24 +147,24 @@ export default function Statistiques() {
       </Card>
 
       {recurrences.length > 0 && (
-        <Card className="p-5 mb-6" accent="#e2a611">
+        <Card className="p-5 mb-6" accent="#c2871e">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="kicker text-[#8a5c07]">Récurrences · seuil ≥ {seuilRecurrence}</h3>
-            <label className="flex items-center gap-2 text-[12px] text-steel no-print">
+            <h3 className="kicker text-[#7a5714]">Récurrences · seuil ≥ {seuilRecurrence}</h3>
+            <label className="flex items-center gap-2 text-[12px] text-ardoise-500 no-print">
               Seuil
               <Input type="number" min={2} max={20} value={seuilRecurrence} onChange={(e) => setSeuilRecurrence(Number(e.target.value) || 2)} className="w-16 py-1" />
             </label>
           </div>
           <div className="grid grid-cols-3 gap-2">
             {recurrences.map((r) => (
-              <div key={r.type + r.cle} className="flex items-center justify-between bg-signal-amber/10 border border-signal-amber/30 rounded px-3 py-2 text-[13px]">
-                <span className="text-ink truncate">
+              <div key={r.type + r.cle} className="flex items-center justify-between bg-ambre/10 border border-ambre/30 rounded px-3 py-2 text-[13px]">
+                <span className="text-ardoise-900 truncate">
                   {r.cle}
-                  <span className="text-steel ml-1">
+                  <span className="text-ardoise-500 ml-1">
                     ({r.type === 'medicament' ? 'médicament' : r.type === 'personne' ? 'personne' : "type d'erreur"})
                   </span>
                 </span>
-                <span className="num font-bold text-[#8a5c07] shrink-0 ml-2">× {r.total}</span>
+                <span className="num font-bold text-[#7a5714] shrink-0 ml-2">× {r.total}</span>
               </div>
             ))}
           </div>
@@ -172,33 +172,33 @@ export default function Statistiques() {
       )}
 
       <div className="grid grid-cols-2 gap-5 mb-5 print-stack stagger">
-        <Card className="p-5" accent="#0f9d53">
-          <h3 className="kicker text-steel mb-4">Top types d'erreur</h3>
-          <HBar data={parType} color="#0f9d53" />
+        <Card className="p-5" accent="#0e7c74">
+          <h3 className="kicker text-ardoise-500 mb-4">Top types d'erreur</h3>
+          <HBar data={parType} color="#0e7c74" />
         </Card>
-        <Card className="p-5" accent="#0b7d42">
-          <h3 className="kicker text-steel mb-4">Étape du circuit du médicament</h3>
-          <HBar data={parEtape} color="#0b7d42" />
+        <Card className="p-5" accent="#234750">
+          <h3 className="kicker text-ardoise-500 mb-4">Étape du circuit du médicament</h3>
+          <HBar data={parEtape} color="#234750" />
         </Card>
-        <Card className="p-5" accent="#d99a06">
-          <h3 className="kicker text-steel mb-4">Médicaments les plus concernés</h3>
-          {parMed.length === 0 ? <p className="text-[13px] text-steel">Aucune donnée.</p> : <HBar data={parMed} color="#d99a06" />}
+        <Card className="p-5" accent="#c2871e">
+          <h3 className="kicker text-ardoise-500 mb-4">Médicaments les plus concernés</h3>
+          {parMed.length === 0 ? <p className="text-[13px] text-ardoise-500">Aucune donnée.</p> : <HBar data={parMed} color="#c2871e" />}
         </Card>
-        <Card className="p-5" accent="#42544d">
-          <h3 className="kicker text-steel mb-4">Par personne impliquée</h3>
-          {parPersonne.length === 0 ? <p className="text-[13px] text-steel">Aucune donnée.</p> : <HBar data={parPersonne} color="#42544d" />}
+        <Card className="p-5" accent="#3c4c50">
+          <h3 className="kicker text-ardoise-500 mb-4">Par personne impliquée</h3>
+          {parPersonne.length === 0 ? <p className="text-[13px] text-ardoise-500">Aucune donnée.</p> : <HBar data={parPersonne} color="#3c4c50" />}
         </Card>
       </div>
 
       <div className="grid grid-cols-3 gap-5 print-stack stagger">
-        <Card className="p-5" accent="#dc3d1f">
-          <h3 className="kicker text-steel mb-4">Par gravité</h3>
+        <Card className="p-5" accent="#b23b3b">
+          <h3 className="kicker text-ardoise-500 mb-4">Par gravité</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parGravite}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#dde3df" vertical={false} />
-              <XAxis dataKey="cle" tick={{ fontSize: 12, fill: '#66786f' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12, fill: '#66786f' }} axisLine={false} tickLine={false} allowDecimals={false} />
-              <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #0d1a16', fontSize: 13 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#dce3e1" vertical={false} />
+              <XAxis dataKey="cle" tick={{ fontSize: 12, fill: '#66787a' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 12, fill: '#66787a' }} axisLine={false} tickLine={false} allowDecimals={false} />
+              <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #12262b', fontSize: 13 }} />
               <Bar dataKey="total" radius={[2, 2, 0, 0]}>
                 {parGravite.map((entry, i) => (
                   <Cell key={i} fill={graviteInfo(entry.cle).couleur} />
@@ -208,28 +208,28 @@ export default function Statistiques() {
           </ResponsiveContainer>
         </Card>
 
-        <Card className="p-5" accent="#0f9d53">
-          <h3 className="kicker text-steel mb-4">Par saison</h3>
+        <Card className="p-5" accent="#0a6259">
+          <h3 className="kicker text-ardoise-500 mb-4">Par saison</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parSaison.map((s) => ({ ...s, label: SEASON_LABELS[s.cle] ?? s.cle }))}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#dde3df" vertical={false} />
-              <XAxis dataKey="cle" tick={{ fontSize: 12, fill: '#66786f' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12, fill: '#66786f' }} axisLine={false} tickLine={false} allowDecimals={false} />
-              <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #0d1a16', fontSize: 13 }} />
-              <Bar dataKey="total" radius={[2, 2, 0, 0]} fill="#0f9d53" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#dce3e1" vertical={false} />
+              <XAxis dataKey="cle" tick={{ fontSize: 12, fill: '#66787a' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 12, fill: '#66787a' }} axisLine={false} tickLine={false} allowDecimals={false} />
+              <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #12262b', fontSize: 13 }} />
+              <Bar dataKey="total" radius={[2, 2, 0, 0]} fill="#0a6259" />
             </BarChart>
           </ResponsiveContainer>
         </Card>
 
-        <Card className="p-5" accent="#0a6236">
-          <h3 className="kicker text-steel mb-4">Par trimestre</h3>
+        <Card className="p-5" accent="#12262b">
+          <h3 className="kicker text-ardoise-500 mb-4">Par trimestre</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={parTrimestre}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#dde3df" vertical={false} />
-              <XAxis dataKey="cle" tick={{ fontSize: 11, fill: '#66786f' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12, fill: '#66786f' }} axisLine={false} tickLine={false} allowDecimals={false} />
-              <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #0d1a16', fontSize: 13 }} />
-              <Bar dataKey="total" radius={[2, 2, 0, 0]} fill="#0a6236" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#dce3e1" vertical={false} />
+              <XAxis dataKey="cle" tick={{ fontSize: 11, fill: '#66787a' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 12, fill: '#66787a' }} axisLine={false} tickLine={false} allowDecimals={false} />
+              <Tooltip contentStyle={{ borderRadius: 4, border: '2px solid #12262b', fontSize: 13 }} />
+              <Bar dataKey="total" radius={[2, 2, 0, 0]} fill="#12262b" />
             </BarChart>
           </ResponsiveContainer>
         </Card>

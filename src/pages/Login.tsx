@@ -23,7 +23,7 @@ export default function Login({ onLogin }: { onLogin: (session: SessionUtilisate
   if (premiereFois === null) return null
 
   return (
-    <div className="h-screen w-screen flex bg-console relative overflow-hidden">
+    <div className="h-screen w-screen flex bg-encre relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.06]"
         style={{
@@ -31,15 +31,15 @@ export default function Login({ onLogin }: { onLogin: (session: SessionUtilisate
           backgroundSize: '28px 28px'
         }}
       />
-      <div className="absolute top-0 bottom-0 left-1/2 w-3 hazard-stripe" style={{ ['--stripe-a' as any]: 'transparent', ['--stripe-b' as any]: 'rgba(15,157,83,0.15)' }} />
+      <div className="absolute top-0 bottom-0 left-1/2 w-px" style={{ background: 'rgba(14,124,116,0.3)' }} />
 
       <div className="m-auto w-full max-w-md px-6 relative z-10">
         <div className="flex flex-col items-center mb-8">
-          <div className="hazard-diamond w-16 h-16 bg-brand-500 flex items-center justify-center mb-5 shadow-pop">
+          <div className="hazard-diamond w-16 h-16 bg-sarcelle flex items-center justify-center mb-5 shadow-pop">
             <ShieldPlus className="text-white" size={28} />
           </div>
           <h1 className="text-[20px] font-bold text-white text-center leading-tight">Registre des Incidents Pharmacie</h1>
-          <p className="kicker text-console-dim mt-2">Sécurité du circuit du médicament</p>
+          <p className="kicker text-ardoise-300 mt-2">Sécurité du circuit du médicament</p>
         </div>
 
         {premiereFois ? (
@@ -49,14 +49,14 @@ export default function Login({ onLogin }: { onLogin: (session: SessionUtilisate
         )}
       </div>
 
-      <p className="absolute bottom-5 left-0 right-0 text-center kicker text-console-dim">Hors ligne · Données stockées localement</p>
+      <p className="absolute bottom-5 left-0 right-0 text-center kicker text-ardoise-300">Hors ligne · Données stockées localement</p>
     </div>
   )
 }
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-surface rounded-xl2 shadow-pop border-t-[3px] border-brand-500 p-7" style={{ animation: 'modal-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both' }}>
+    <div className="bg-surface rounded-xl2 shadow-pop border-t-[3px] border-sarcelle p-7" style={{ animation: 'modal-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both' }}>
       {children}
     </div>
   )
@@ -95,7 +95,7 @@ function SeConnecter({ utilisateurs, onDone }: { utilisateurs: { nom: string; no
   if (utilisateurs.length === 0) {
     return (
       <Card>
-        <p className="text-[13px] text-steel text-center">Aucun compte actif. Contactez votre pharmacien-chef pour obtenir un accès.</p>
+        <p className="text-[13px] text-ardoise-500 text-center">Aucun compte actif. Contactez votre pharmacien-chef pour obtenir un accès.</p>
       </Card>
     )
   }
@@ -103,7 +103,7 @@ function SeConnecter({ utilisateurs, onDone }: { utilisateurs: { nom: string; no
   return (
     <Card>
       <form onSubmit={handleSubmit}>
-        {erreur && <div className="mb-4 text-[13px] font-medium text-hazard-h bg-signal-red/10 border-2 border-signal-red/40 rounded-md px-4 py-2.5">{erreur}</div>}
+        {erreur && <div className="mb-4 text-[13px] font-medium text-alerte bg-alerte/10 border-2 border-alerte/40 rounded-xl2 px-4 py-2.5">{erreur}</div>}
         <Field label="Utilisateur" required>
           <Select value={nomUtilisateur} onChange={(e) => setNomUtilisateur(e.target.value)}>
             {utilisateurs.map((u) => (
@@ -165,14 +165,14 @@ function SetupAdmin({ onDone, onRetourConnexion }: { onDone: (s: SessionUtilisat
   return (
     <Card>
       <div className="flex items-center gap-2 mb-4">
-        <KeyRound size={16} className="text-brand-600" />
-        <p className="kicker text-brand-600">Première utilisation</p>
+        <KeyRound size={16} className="text-sarcelle-600" />
+        <p className="kicker text-sarcelle-600">Première utilisation</p>
       </div>
-      <p className="text-[13px] text-steel mb-5">
+      <p className="text-[13px] text-ardoise-500 mb-5">
         Créez le compte administrateur principal. Cette personne pourra ensuite ajouter les autres membres de l'équipe et gérer les archives.
       </p>
       <form onSubmit={handleSubmit}>
-        {erreur && <div className="mb-4 text-[13px] font-medium text-hazard-h bg-signal-red/10 border-2 border-signal-red/40 rounded-md px-4 py-2.5">{erreur}</div>}
+        {erreur && <div className="mb-4 text-[13px] font-medium text-alerte bg-alerte/10 border-2 border-alerte/40 rounded-xl2 px-4 py-2.5">{erreur}</div>}
         <Field label="Nom complet" required>
           <Input value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ex. : Marie Tremblay" autoFocus required />
         </Field>
@@ -188,7 +188,7 @@ function SetupAdmin({ onDone, onRetourConnexion }: { onDone: (s: SessionUtilisat
         <Button type="submit" className="w-full mt-2" disabled={enCours}>
           <UserPlus size={16} /> {enCours ? 'Création…' : 'Créer le compte et démarrer'}
         </Button>
-        <button type="button" onClick={onRetourConnexion} className="w-full text-center text-[12px] text-steel hover:text-ink mt-4">
+        <button type="button" onClick={onRetourConnexion} className="w-full text-center text-[12px] text-ardoise-500 hover:text-encre mt-4">
           Un compte existe déjà ? Retour à la connexion
         </button>
       </form>

@@ -97,17 +97,17 @@ export default function CommandPalette({ session }: { session: SessionUtilisateu
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-start justify-center pt-[14vh] px-4 bg-console/60 backdrop-blur-[2px]"
+      className="fixed inset-0 z-[200] flex items-start justify-center pt-[14vh] px-4 bg-encre/60 backdrop-blur-[2px]"
       style={{ animation: 'fade-in 0.12s ease-out both' }}
       onClick={() => setOpen(false)}
     >
       <div
-        className="w-full max-w-xl bg-surface rounded-xl2 shadow-pop overflow-hidden border border-fog"
+        className="w-full max-w-xl bg-surface rounded-xl2 shadow-pop overflow-hidden border border-ligne"
         style={{ animation: 'modal-in 0.16s cubic-bezier(0.16, 1, 0.3, 1) both' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-fog">
-          <Search size={17} className="text-silver shrink-0" />
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-ligne">
+          <Search size={17} className="text-ardoise-300 shrink-0" />
           <input
             ref={inputRef}
             value={query}
@@ -117,13 +117,13 @@ export default function CommandPalette({ session }: { session: SessionUtilisateu
             }}
             onKeyDown={onKeyDownInput}
             placeholder="Aller à une page, un signalement (n° ou mot-clé)…"
-            className="flex-1 bg-transparent outline-none text-[14px] text-ink placeholder:text-silver"
+            className="flex-1 bg-transparent outline-none text-[14px] text-ardoise-900 placeholder:text-ardoise-300"
           />
-          <kbd className="font-mono text-[10px] text-steel bg-mist border border-fog rounded px-1.5 py-0.5">Échap</kbd>
+          <kbd className="font-mono text-[10px] text-ardoise-500 bg-ligne border border-ligne rounded px-1.5 py-0.5">Échap</kbd>
         </div>
         <div className="max-h-[360px] overflow-y-auto py-2">
           {results.length === 0 && (
-            <p className="text-[13px] text-steel text-center py-8">Aucun résultat pour « {query} ».</p>
+            <p className="text-[13px] text-ardoise-500 text-center py-8">Aucun résultat pour « {query} ».</p>
           )}
           {matchedActions.length > 0 && (
             <div className="px-2">
@@ -133,8 +133,8 @@ export default function CommandPalette({ session }: { session: SessionUtilisateu
             </div>
           )}
           {matchedEvenements.length > 0 && (
-            <div className="px-2 mt-1 pt-1 border-t border-fog">
-              <p className="kicker text-steel px-2.5 py-1.5">Signalements</p>
+            <div className="px-2 mt-1 pt-1 border-t border-ligne">
+              <p className="kicker text-ardoise-500 px-2.5 py-1.5">Signalements</p>
               {matchedEvenements.map((e, i) => {
                 const idx = matchedActions.length + i
                 return (
@@ -142,14 +142,14 @@ export default function CommandPalette({ session }: { session: SessionUtilisateu
                     key={e.id}
                     onClick={() => run(idx)}
                     onMouseEnter={() => setActive(idx)}
-                    className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-left transition-colors ${idx === active ? 'bg-mist' : 'hover:bg-mist/60'}`}
+                    className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-left transition-colors ${idx === active ? 'bg-ligne' : 'hover:bg-ligne/60'}`}
                   >
                     <GraviteBadge code={e.gravite} size="sm" />
                     <div className="min-w-0 flex-1">
-                      <p className="text-[13px] font-semibold text-ink truncate">
+                      <p className="text-[13px] font-semibold text-encre truncate">
                         #{e.numero} · {e.type_erreur}
                       </p>
-                      <p className="text-[11px] text-steel truncate">
+                      <p className="text-[11px] text-ardoise-500 truncate">
                         {formatDateCourte(e.date_evenement)} {e.medicament_nom ? `· ${e.medicament_nom}` : ''}
                       </p>
                     </div>
@@ -159,7 +159,7 @@ export default function CommandPalette({ session }: { session: SessionUtilisateu
             </div>
           )}
         </div>
-        <div className="flex items-center gap-4 px-4 py-2.5 border-t border-fog bg-mist/40 text-[11px] text-steel">
+        <div className="flex items-center gap-4 px-4 py-2.5 border-t border-ligne bg-ligne/40 text-[11px] text-ardoise-500">
           <span className="flex items-center gap-1">
             <CornerDownLeft size={12} /> Ouvrir
           </span>
@@ -175,11 +175,11 @@ function PaletteRow({ active, icon, kicker, label, onClick, onHover }: { active:
     <button
       onClick={onClick}
       onMouseEnter={onHover}
-      className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-left transition-colors ${active ? 'bg-mist' : 'hover:bg-mist/60'}`}
+      className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-left transition-colors ${active ? 'bg-ligne' : 'hover:bg-ligne/60'}`}
     >
-      <span className="text-graphite shrink-0">{icon}</span>
-      <span className="text-[13px] text-ink font-medium flex-1">{label}</span>
-      <span className="kicker text-silver">{kicker}</span>
+      <span className="text-ardoise-700 shrink-0">{icon}</span>
+      <span className="text-[13px] text-ardoise-900 font-medium flex-1">{label}</span>
+      <span className="kicker text-ardoise-300">{kicker}</span>
     </button>
   )
 }

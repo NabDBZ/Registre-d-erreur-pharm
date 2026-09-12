@@ -69,7 +69,7 @@ export default function Registre() {
       <Card className="p-4 mb-5">
         <div className="grid grid-cols-6 gap-3">
           <div className="col-span-2 relative">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-silver" />
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ardoise-300" />
             <Input className="pl-9" placeholder="Rechercher (description, médicament, patient)" value={filtres.recherche ?? ''} onChange={(e) => patch({ recherche: e.target.value })} />
           </div>
           <Input type="date" value={filtres.dateDebut ?? ''} onChange={(e) => patch({ dateDebut: e.target.value })} title="Date de début" />
@@ -151,14 +151,14 @@ export default function Registre() {
           <div className="overflow-x-auto">
           <table className="w-full text-[13px] min-w-[900px]">
             <thead>
-              <tr className="text-left bg-console text-console-text">
-                <th className="px-4 py-3 kicker font-bold text-console-dim">N°</th>
-                <th className="px-4 py-3 kicker font-bold text-console-dim">Date</th>
-                <th className="px-4 py-3 kicker font-bold text-console-dim">Gravité</th>
-                <th className="px-4 py-3 kicker font-bold text-console-dim">Type d'erreur</th>
-                <th className="px-4 py-3 kicker font-bold text-console-dim">Étape</th>
-                <th className="px-4 py-3 kicker font-bold text-console-dim">Médicament</th>
-                <th className="px-4 py-3 kicker font-bold text-console-dim">Statut</th>
+              <tr className="text-left border-b border-ligne-forte">
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">N°</th>
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">Date</th>
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">Gravité</th>
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">Type d'erreur</th>
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">Étape</th>
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">Médicament</th>
+                <th className="px-4 py-3 kicker font-bold text-ardoise-500">Statut</th>
               </tr>
             </thead>
             <tbody>
@@ -166,16 +166,16 @@ export default function Registre() {
                 <tr
                   key={e.id}
                   onClick={() => navigate(`/evenement/${e.id}`)}
-                  className="border-b border-fog last:border-0 hover:bg-mist/60 transition-colors cursor-pointer"
+                  className="border-b border-ligne last:border-0 hover:bg-ligne/60 transition-colors cursor-pointer"
                 >
-                  <td className="px-4 py-3 num text-graphite font-bold">#{e.numero}</td>
-                  <td className="px-4 py-3 text-graphite whitespace-nowrap num">{formatDateCourte(e.date_evenement)}</td>
+                  <td className="px-4 py-3 num text-ardoise-700 font-bold">#{e.numero}</td>
+                  <td className="px-4 py-3 text-ardoise-700 whitespace-nowrap num">{formatDateCourte(e.date_evenement)}</td>
                   <td className="px-4 py-3">
                     <GraviteBadge code={e.gravite} size="sm" />
                   </td>
-                  <td className="px-4 py-3 text-ink font-medium max-w-[220px] truncate">{e.type_erreur}</td>
-                  <td className="px-4 py-3 text-graphite max-w-[200px] truncate">{e.etape_circuit}</td>
-                  <td className="px-4 py-3 text-graphite">{e.medicament_nom || '—'}</td>
+                  <td className="px-4 py-3 text-encre font-medium max-w-[220px] truncate">{e.type_erreur}</td>
+                  <td className="px-4 py-3 text-ardoise-700 max-w-[200px] truncate">{e.etape_circuit}</td>
+                  <td className="px-4 py-3 text-ardoise-700">{e.medicament_nom || '—'}</td>
                   <td className="px-4 py-3">{e.supprime === 1 ? <Badge tone="critical">Archivé</Badge> : <StatutBadge statut={e.statut} />}</td>
                 </tr>
               ))}

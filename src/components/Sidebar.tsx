@@ -11,67 +11,44 @@ const items = [
   { to: '/journal', label: "Journal d'audit", icon: ScrollText }
 ]
 
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `flex items-center gap-3 px-3 py-2.5 rounded-xl2 text-[14px] font-medium transition-colors border-l-[3px] ${
+    isActive ? 'bg-sarcelle text-white border-sarcelle' : 'text-ardoise-300 border-transparent hover:bg-encre-600/60 hover:text-white'
+  }`
+
 export default function Sidebar({ pharmacyName, session, onLogout }: { pharmacyName: string; session: SessionUtilisateur; onLogout: () => void }) {
   return (
-    <aside className="w-[240px] shrink-0 bg-console flex flex-col h-full no-print relative">
-      <div className="absolute top-0 right-0 bottom-0 w-[3px] hazard-stripe" style={{ ['--stripe-a' as any]: '#0b1613', ['--stripe-b' as any]: '#0f9d53' }} />
-      <div className="h-16 flex items-center gap-2.5 px-5 border-b border-console-line">
-        <div className="w-8 h-8 rounded-md bg-brand-500 flex items-center justify-center text-white shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]">
+    <aside className="w-[240px] shrink-0 bg-encre flex flex-col h-full no-print">
+      <div className="h-16 flex items-center gap-2.5 px-5 border-b border-encre-700/60">
+        <div className="w-8 h-8 rounded-xl2 bg-sarcelle flex items-center justify-center text-white shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
           <ShieldPlus size={18} />
         </div>
         <div className="min-w-0">
           <div className="text-[13px] font-bold text-white leading-tight truncate">{pharmacyName || 'Registre Pharmacie'}</div>
-          <p className="kicker text-console-dim leading-tight truncate">Sécurité du circuit</p>
+          <p className="kicker text-ardoise-300 leading-tight truncate">Sécurité du circuit</p>
         </div>
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">
         {items.map(({ to, label, icon: Icon, end }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={end}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] font-medium transition-colors border-l-[3px] ${
-                isActive
-                  ? 'bg-console-raised text-white border-brand-400'
-                  : 'text-console-text border-transparent hover:bg-console-raised/60 hover:text-white'
-              }`
-            }
-          >
+          <NavLink key={to} to={to} end={end} className={navLinkClass}>
             <Icon size={18} />
             {label}
           </NavLink>
         ))}
         {session.role === 'Administrateur' && (
-          <NavLink
-            to="/utilisateurs"
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] font-medium transition-colors border-l-[3px] ${
-                isActive
-                  ? 'bg-console-raised text-white border-brand-400'
-                  : 'text-console-text border-transparent hover:bg-console-raised/60 hover:text-white'
-              }`
-            }
-          >
+          <NavLink to="/utilisateurs" className={navLinkClass}>
             <UserCog size={18} />
             Utilisateurs
           </NavLink>
         )}
-        <NavLink
-          to="/parametres"
-          className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] font-medium transition-colors border-l-[3px] ${
-              isActive ? 'bg-console-raised text-white border-brand-400' : 'text-console-text border-transparent hover:bg-console-raised/60 hover:text-white'
-            }`
-          }
-        >
+        <NavLink to="/parametres" className={navLinkClass}>
           <Settings size={18} />
           Paramètres
         </NavLink>
       </nav>
-      <div className="px-4 py-3 border-t border-console-line">
+      <div className="px-4 py-3 border-t border-encre-700/60">
         <div className="flex items-center gap-2.5 px-1 py-1.5">
-          <div className="w-8 h-8 rounded-full bg-console-raised flex items-center justify-center text-[12px] font-bold text-brand-400 shrink-0">
+          <div className="w-8 h-8 rounded-full bg-encre-600 flex items-center justify-center text-[12px] font-bold text-sarcelle-100 shrink-0">
             {session.nom
               .split(' ')
               .map((p) => p[0])
@@ -81,20 +58,20 @@ export default function Sidebar({ pharmacyName, session, onLogout }: { pharmacyN
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-[13px] font-semibold text-white truncate">{session.nom}</p>
-            <p className="kicker text-console-dim truncate">{session.role}</p>
+            <p className="kicker text-ardoise-300 truncate">{session.role}</p>
           </div>
-          <button onClick={onLogout} title="Se déconnecter" className="text-console-dim hover:text-white shrink-0 p-1">
+          <button onClick={onLogout} title="Se déconnecter" className="text-ardoise-300 hover:text-white shrink-0 p-1">
             <LogOut size={16} />
           </button>
         </div>
         <div className="flex items-center gap-2 mt-2 px-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-400 shrink-0 pulse-dot" />
-          <p className="kicker text-console-dim leading-tight">Hors ligne · Données locales</p>
+          <span className="w-1.5 h-1.5 rounded-full bg-sarcelle shrink-0 pulse-dot" />
+          <p className="kicker text-ardoise-300 leading-tight">Hors ligne · Données locales</p>
         </div>
         <div className="flex items-center gap-1.5 mt-2 px-1">
-          <kbd className="font-mono text-[10px] text-console-dim bg-console-raised border border-console-line rounded px-1.5 py-0.5">Ctrl</kbd>
-          <kbd className="font-mono text-[10px] text-console-dim bg-console-raised border border-console-line rounded px-1.5 py-0.5">K</kbd>
-          <p className="kicker text-console-dim leading-tight">Recherche rapide</p>
+          <kbd className="font-mono text-[10px] text-ardoise-300 bg-encre-600 border border-encre-700 rounded px-1.5 py-0.5">Ctrl</kbd>
+          <kbd className="font-mono text-[10px] text-ardoise-300 bg-encre-600 border border-encre-700 rounded px-1.5 py-0.5">K</kbd>
+          <p className="kicker text-ardoise-300 leading-tight">Recherche rapide</p>
         </div>
       </div>
     </aside>

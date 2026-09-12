@@ -52,7 +52,7 @@ export default function Personnel() {
           <div className="overflow-x-auto">
           <table className="w-full text-[13px] min-w-[640px]">
             <thead>
-              <tr className="text-left bg-console text-console-dim">
+              <tr className="text-left bg-papier text-ardoise-500 border-b border-ligne-forte">
                 <th className="px-4 py-3 kicker font-bold">Nom</th>
                 <th className="px-4 py-3 kicker font-bold">Rôle</th>
                 <th className="px-4 py-3 kicker font-bold">Statut</th>
@@ -62,15 +62,15 @@ export default function Personnel() {
             </thead>
             <tbody>
               {membres.map((m) => (
-                <tr key={m.id} className="border-b border-fog last:border-0 hover:bg-mist/60 transition-colors">
-                  <td className="px-4 py-3 text-ink font-medium">{m.nom}</td>
-                  <td className="px-4 py-3 text-graphite">{m.role}</td>
+                <tr key={m.id} className="border-b border-ligne last:border-0 hover:bg-ligne/60 transition-colors">
+                  <td className="px-4 py-3 text-encre font-medium">{m.nom}</td>
+                  <td className="px-4 py-3 text-ardoise-700">{m.role}</td>
                   <td className="px-4 py-3">
                     <Badge tone={m.actif ? 'success' : 'neutral'}>{m.actif ? 'Actif' : 'Inactif'}</Badge>
                   </td>
-                  <td className="px-4 py-3 text-steel">{m.notes || '—'}</td>
+                  <td className="px-4 py-3 text-ardoise-500">{m.notes || '—'}</td>
                   <td className="px-4 py-3 text-right space-x-2 whitespace-nowrap">
-                    <button onClick={() => ouvrirEdition(m)} className="text-steel hover:text-brand-600">
+                    <button onClick={() => ouvrirEdition(m)} className="text-ardoise-500 hover:text-sarcelle-600">
                       <Pencil size={15} />
                     </button>
                     <button
@@ -86,7 +86,7 @@ export default function Personnel() {
                         })
                         setVersion((v) => v + 1)
                       }}
-                      className="text-[12px] text-graphite hover:text-brand-600 underline"
+                      className="text-[12px] text-ardoise-700 hover:text-sarcelle-600 underline"
                     >
                       {m.actif ? 'Désactiver' : 'Réactiver'}
                     </button>

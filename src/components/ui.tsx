@@ -6,7 +6,7 @@ import { useCountUp } from '../lib/useCountUp'
 export function Card({ children, className = '', accent, hoverable = false }: { children: React.ReactNode; className?: string; accent?: string; hoverable?: boolean }) {
   return (
     <div
-      className={`relative bg-surface rounded-xl2 shadow-card border border-fog transition-all duration-200 ${
+      className={`relative bg-surface rounded-xl2 shadow-card border border-ligne transition-all duration-200 ${
         hoverable ? 'hover:-translate-y-[2px] hover:shadow-pop cursor-pointer' : ''
       } ${className}`}
     >
@@ -24,13 +24,13 @@ export function Button({
   ...rest
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'danger' | 'secondary'; size?: 'sm' | 'md' }) {
   const base =
-    'inline-flex items-center gap-2 justify-center font-semibold rounded-md transition-all duration-150 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 whitespace-nowrap tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas'
+    'inline-flex items-center gap-2 justify-center font-semibold rounded-xl2 transition-all duration-150 active:scale-[0.96] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 whitespace-nowrap tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sarcelle/40 focus-visible:ring-offset-2 focus-visible:ring-offset-papier'
   const sizes = size === 'sm' ? 'text-[13px] px-3 py-1.5' : 'text-[14px] px-5 py-2.5'
   const variants: Record<string, string> = {
-    primary: 'bg-brand-500 text-white hover:bg-brand-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] hover:shadow-[0_4px_14px_-4px_rgba(15,157,83,0.5)]',
-    secondary: 'bg-console text-console-text hover:bg-console-raised border border-console-line',
-    ghost: 'bg-transparent text-graphite hover:bg-mist',
-    danger: 'bg-white text-hazard-h border-2 border-hazard-h hover:bg-hazard-h hover:text-white'
+    primary: 'bg-sarcelle text-white hover:bg-sarcelle-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] hover:shadow-[0_4px_14px_-4px_rgba(14,124,116,0.5)]',
+    secondary: 'bg-surface text-encre border border-ligne-forte hover:bg-papier',
+    ghost: 'bg-transparent text-sarcelle-600 hover:bg-sarcelle-100',
+    danger: 'bg-white text-alerte border-2 border-alerte hover:bg-alerte hover:text-white'
   }
   return (
     <button className={`${base} ${sizes} ${variants[variant]} ${className}`} {...rest}>
@@ -41,11 +41,11 @@ export function Button({
 
 export function Badge({ children, tone = 'neutral' }: { children: React.ReactNode; tone?: 'neutral' | 'brand' | 'warn' | 'critical' | 'success' }) {
   const tones: Record<string, string> = {
-    neutral: 'bg-mist text-graphite border border-fog',
-    brand: 'bg-brand-50 text-brand-700 border border-brand-100',
-    warn: 'bg-signal-amber/15 text-[#8a5c07] border border-signal-amber/40',
-    critical: 'bg-signal-red/10 text-hazard-h border border-signal-red/30',
-    success: 'bg-brand-50 text-brand-700 border border-brand-100'
+    neutral: 'bg-papier text-ardoise-700 border border-ligne',
+    brand: 'bg-sarcelle-100 text-sarcelle-600 border border-sarcelle-100',
+    warn: 'bg-ambre-100 text-[#7a5714] border border-ambre/40',
+    critical: 'bg-alerte-100 text-alerte border border-alerte/30',
+    success: 'bg-sarcelle-100 text-sarcelle-600 border border-sarcelle-100'
   }
   return <span className={`inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wide ${tones[tone]}`}>{children}</span>
 }
@@ -74,17 +74,17 @@ export function StatutBadge({ statut }: { statut: string }) {
 export function Field({ label, children, hint, required }: { label: string; children: React.ReactNode; hint?: string; required?: boolean }) {
   return (
     <label className="block mb-4">
-      <span className="kicker block text-steel mb-2">
-        {label} {required && <span className="text-hazard-h">*</span>}
+      <span className="kicker block text-ardoise-500 mb-2">
+        {label} {required && <span className="text-alerte">*</span>}
       </span>
       {children}
-      {hint && <span className="block text-[12px] text-steel mt-1">{hint}</span>}
+      {hint && <span className="block text-[12px] text-ardoise-500 mt-1">{hint}</span>}
     </label>
   )
 }
 
 const inputBase =
-  'w-full bg-white border-2 border-fog rounded-md px-3.5 py-2.5 text-[14px] text-ink placeholder:text-silver focus:outline-none focus:ring-2 focus:ring-brand-400/40 focus:border-brand-500 transition-colors'
+  'w-full bg-white border-2 border-ligne-forte rounded-xl2 px-3.5 py-2.5 text-[14px] text-ardoise-900 placeholder:text-ardoise-300 focus:outline-none focus:ring-2 focus:ring-sarcelle/30 focus:border-sarcelle transition-colors'
 
 export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={`${inputBase} ${props.className ?? ''}`} />
@@ -101,7 +101,7 @@ export function Select({ children, ...rest }: React.SelectHTMLAttributes<HTMLSel
       className={`${inputBase} appearance-none bg-white bg-[length:16px] bg-[right_0.75rem_center] bg-no-repeat pr-9 ${rest.className ?? ''}`}
       style={{
         backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2342544d' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")"
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233c4c50' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")"
       }}
     >
       {children}
@@ -186,7 +186,7 @@ export function AutocompleteInput<T extends Suggestion>({
   return (
     <div className="relative" ref={containerRef}>
       <div className="relative">
-        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-silver pointer-events-none" />
+        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ardoise-300 pointer-events-none" />
         <Input
           value={value}
           onChange={(e) => {
@@ -202,17 +202,19 @@ export function AutocompleteInput<T extends Suggestion>({
         />
       </div>
       {open && filtered.length > 0 && (
-        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white border-2 border-fog rounded-md shadow-pop max-h-56 overflow-y-auto py-1">
+        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white border-2 border-ligne-forte rounded-xl2 shadow-pop max-h-56 overflow-y-auto py-1">
           {filtered.map((s, i) => (
             <button
               type="button"
               key={s.label}
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => select(s)}
-              className={`w-full flex items-baseline gap-2 text-left px-3 py-2 text-[13px] transition-colors ${i === highlighted ? 'bg-mist text-ink' : 'text-graphite hover:bg-mist/60'}`}
+              className={`w-full flex items-baseline gap-2 text-left px-3 py-2 text-[13px] transition-colors ${
+                i === highlighted ? 'bg-sarcelle-100 text-sarcelle-600 font-semibold' : 'text-ardoise-700 hover:bg-papier'
+              }`}
             >
               <span className="flex-1 min-w-0 truncate">{s.label}</span>
-              {s.detail && <span className="kicker text-silver shrink-0">{s.detail}</span>}
+              {s.detail && <span className="kicker text-ardoise-500 shrink-0">{s.detail}</span>}
             </button>
           ))}
         </div>
@@ -223,11 +225,11 @@ export function AutocompleteInput<T extends Suggestion>({
 
 export function PageHeader({ kicker, title, subtitle, actions }: { kicker?: string; title: string; subtitle?: string; actions?: React.ReactNode }) {
   return (
-    <div className="flex items-start justify-between mb-7 gap-4 flex-wrap border-b-2 border-ink pb-5">
+    <div className="flex items-start justify-between mb-7 gap-4 flex-wrap border-b border-ligne-forte pb-5">
       <div>
-        {kicker && <p className="kicker text-brand-600 mb-1.5">{kicker}</p>}
-        <h1 className="text-[26px] font-bold text-ink tracking-tight leading-none">{title}</h1>
-        {subtitle && <p className="text-[14px] text-steel mt-2 max-w-xl">{subtitle}</p>}
+        {kicker && <p className="kicker text-sarcelle-600 mb-1.5">{kicker}</p>}
+        <h1 className="text-[26px] font-bold text-encre tracking-tight leading-none">{title}</h1>
+        {subtitle && <p className="text-[14px] text-ardoise-500 mt-2 max-w-xl">{subtitle}</p>}
       </div>
       {actions && <div className="flex items-center gap-2 pt-1">{actions}</div>}
     </div>
@@ -237,9 +239,9 @@ export function PageHeader({ kicker, title, subtitle, actions }: { kicker?: stri
 export function EmptyState({ icon, title, description, action }: { icon?: React.ReactNode; title: string; description?: string; action?: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-16 px-6">
-      {icon && <div className="mb-4 text-silver">{icon}</div>}
-      <h3 className="text-[16px] font-semibold text-ink mb-1">{title}</h3>
-      {description && <p className="text-[14px] text-steel max-w-sm mb-4">{description}</p>}
+      {icon && <div className="mb-4 text-ardoise-300">{icon}</div>}
+      <h3 className="text-[16px] font-semibold text-encre mb-1">{title}</h3>
+      {description && <p className="text-[14px] text-ardoise-500 max-w-sm mb-4">{description}</p>}
       {action}
     </div>
   )
@@ -258,19 +260,19 @@ export function Modal({ open, onClose, children, title, width = 'max-w-lg' }: { 
   if (!open) return null
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-console/70 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-encre/70 backdrop-blur-[2px]"
       style={{ animation: 'fade-in 0.15s ease-out both' }}
       onClick={onClose}
     >
       <div
-        className={`relative bg-surface rounded-xl2 shadow-pop w-full ${width} max-h-[85vh] overflow-y-auto`}
+        className={`relative bg-surface rounded-2xl shadow-modal w-full ${width} max-h-[85vh] overflow-y-auto`}
         style={{ animation: 'modal-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-brand-500 rounded-t-xl2" />
-        <div className="sticky top-0 bg-surface border-b border-fog px-6 py-4 flex items-center justify-between">
-          <h2 className="text-[16px] font-bold text-ink">{title}</h2>
-          <button onClick={onClose} className="text-steel hover:text-ink text-xl leading-none">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-sarcelle rounded-t-2xl" />
+        <div className="sticky top-0 bg-surface border-b border-ligne px-6 py-4 flex items-center justify-between">
+          <h2 className="text-[16px] font-bold text-encre">{title}</h2>
+          <button onClick={onClose} className="text-ardoise-500 hover:text-encre text-xl leading-none">
             ×
           </button>
         </div>
@@ -292,7 +294,7 @@ export function MultiCheck({ options, values, onChange }: { options: string[]; v
           key={opt}
           onClick={() => toggle(opt)}
           className={`px-3 py-1.5 rounded text-[13px] font-medium border-2 transition-colors ${
-            values.includes(opt) ? 'bg-ink border-ink text-white' : 'bg-white border-fog text-graphite hover:border-steel'
+            values.includes(opt) ? 'bg-encre border-encre text-white' : 'bg-white border-ligne text-ardoise-700 hover:border-ardoise-500'
           }`}
         >
           {opt}
@@ -304,14 +306,19 @@ export function MultiCheck({ options, values, onChange }: { options: string[]; v
 
 /** Blister-pack readout — a KPI cell shaped like a dosette bubble, numerals in mono. */
 export function BlisterStat({ icon, label, value, tone = 'brand' }: { icon: React.ReactNode; label: string; value: number | string; tone?: 'brand' | 'warn' | 'neutral' }) {
-  const ring = tone === 'warn' ? 'ring-signal-amber/50 bg-signal-amber/10 text-[#8a5c07]' : tone === 'neutral' ? 'ring-fog bg-mist text-graphite' : 'ring-brand-300/60 bg-brand-50 text-brand-700'
+  const ring =
+    tone === 'warn'
+      ? 'ring-ambre/50 bg-ambre-100 text-[#7a5714]'
+      : tone === 'neutral'
+        ? 'ring-ligne bg-papier text-ardoise-700'
+        : 'ring-sarcelle/30 bg-sarcelle-100 text-sarcelle-600'
   const animated = useCountUp(typeof value === 'number' ? value : 0)
   return (
-    <div className="bg-surface rounded-xl2 shadow-card border border-fog p-4 flex items-center gap-3 min-w-0 transition-shadow duration-200 hover:shadow-pop">
+    <div className="bg-surface rounded-xl2 shadow-card border border-ligne p-4 flex items-center gap-3 min-w-0 transition-shadow duration-200 hover:shadow-pop">
       <div className={`w-12 h-12 rounded-full ring-4 flex items-center justify-center shrink-0 ${ring}`}>{icon}</div>
       <div className="min-w-0">
-        <div className="num text-[26px] font-bold text-ink leading-none">{typeof value === 'number' ? animated : value}</div>
-        <div className="font-mono text-[10px] font-bold tracking-wide uppercase text-steel mt-1.5 whitespace-nowrap overflow-hidden text-ellipsis">{label}</div>
+        <div className="num text-[26px] font-bold text-encre leading-none">{typeof value === 'number' ? animated : value}</div>
+        <div className="font-mono text-[10px] font-bold tracking-wide uppercase text-ardoise-500 mt-1.5 whitespace-nowrap overflow-hidden text-ellipsis">{label}</div>
       </div>
     </div>
   )

@@ -22,9 +22,9 @@ export function useToast(): ToastContextValue {
 }
 
 const TONE_STYLES: Record<ToastTone, { icon: React.ReactNode; accent: string }> = {
-  success: { icon: <CheckCircle2 size={17} />, accent: '#0f9d53' },
-  warn: { icon: <AlertTriangle size={17} />, accent: '#e2a611' },
-  info: { icon: <Info size={17} />, accent: '#42544d' }
+  success: { icon: <CheckCircle2 size={17} />, accent: '#0e7c74' },
+  warn: { icon: <AlertTriangle size={17} />, accent: '#c2871e' },
+  info: { icon: <Info size={17} />, accent: '#9baaaa' }
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
@@ -50,7 +50,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           return (
             <div
               key={t.id}
-              className="pointer-events-auto flex items-center gap-2.5 bg-console text-white rounded-xl2 shadow-pop pl-3 pr-2 py-2.5 min-w-[220px] max-w-[360px]"
+              className="pointer-events-auto flex items-center gap-2.5 bg-encre text-white rounded-xl2 shadow-modal pl-3 pr-2 py-2.5 min-w-[220px] max-w-[360px]"
               style={{ animation: 'toast-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both', borderLeft: `3px solid ${style.accent}` }}
               role="status"
             >
@@ -58,7 +58,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                 {style.icon}
               </span>
               <span className="text-[13px] font-medium leading-snug flex-1">{t.message}</span>
-              <button onClick={() => dismiss(t.id)} className="text-console-dim hover:text-white shrink-0 p-1">
+              <button onClick={() => dismiss(t.id)} className="text-ardoise-300 hover:text-white shrink-0 p-1">
                 <X size={13} />
               </button>
             </div>

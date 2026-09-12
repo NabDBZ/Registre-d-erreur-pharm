@@ -35,7 +35,7 @@ export default function Utilisateurs() {
           <div className="overflow-x-auto">
             <table className="w-full text-[13px] min-w-[700px]">
               <thead>
-                <tr className="text-left bg-console text-console-dim">
+                <tr className="text-left bg-papier text-ardoise-500 border-b border-ligne-forte">
                   <th className="px-4 py-3 kicker font-bold">Nom</th>
                   <th className="px-4 py-3 kicker font-bold">Identifiant</th>
                   <th className="px-4 py-3 kicker font-bold">Rôle</th>
@@ -46,20 +46,20 @@ export default function Utilisateurs() {
               </thead>
               <tbody>
                 {utilisateurs.map((u) => (
-                  <tr key={u.id} className="border-b border-fog last:border-0 hover:bg-mist/60 transition-colors">
-                    <td className="px-4 py-3 text-ink font-medium">
-                      {u.nom} {u.id === session.id && <span className="text-[11px] text-brand-600">(vous)</span>}
+                  <tr key={u.id} className="border-b border-ligne last:border-0 hover:bg-ligne/60 transition-colors">
+                    <td className="px-4 py-3 text-encre font-medium">
+                      {u.nom} {u.id === session.id && <span className="text-[11px] text-sarcelle-600">(vous)</span>}
                     </td>
-                    <td className="px-4 py-3 num text-graphite">{u.nom_utilisateur}</td>
+                    <td className="px-4 py-3 num text-ardoise-700">{u.nom_utilisateur}</td>
                     <td className="px-4 py-3">
                       <Badge tone={u.role === 'Administrateur' ? 'brand' : 'neutral'}>{u.role}</Badge>
                     </td>
-                    <td className="px-4 py-3 text-steel num">{u.dernier_acces ? formatDateCourte(u.dernier_acces) : '—'}</td>
+                    <td className="px-4 py-3 text-ardoise-500 num">{u.dernier_acces ? formatDateCourte(u.dernier_acces) : '—'}</td>
                     <td className="px-4 py-3">
                       <Badge tone={u.actif ? 'success' : 'neutral'}>{u.actif ? 'Actif' : 'Inactif'}</Badge>
                     </td>
                     <td className="px-4 py-3 text-right space-x-3 whitespace-nowrap">
-                      <button onClick={() => setResetPourId(u.id)} className="text-steel hover:text-brand-600" title="Réinitialiser le mot de passe">
+                      <button onClick={() => setResetPourId(u.id)} className="text-ardoise-500 hover:text-sarcelle-600" title="Réinitialiser le mot de passe">
                         <KeyRound size={15} />
                       </button>
                       {u.id !== session.id && (
@@ -76,7 +76,7 @@ export default function Utilisateurs() {
                             })
                             setVersion((v) => v + 1)
                           }}
-                          className="text-[12px] text-graphite hover:text-brand-600 underline"
+                          className="text-[12px] text-ardoise-700 hover:text-sarcelle-600 underline"
                         >
                           {u.actif ? 'Désactiver' : 'Réactiver'}
                         </button>
@@ -141,7 +141,7 @@ function NouvelUtilisateurForm({ onClose, onCree }: { onClose: () => void; onCre
 
   return (
     <form onSubmit={handleSubmit}>
-      {erreur && <div className="mb-4 text-[13px] font-medium text-hazard-h bg-signal-red/10 border-2 border-signal-red/40 rounded-md px-4 py-2.5">{erreur}</div>}
+      {erreur && <div className="mb-4 text-[13px] font-medium text-alerte bg-alerte/10 border-2 border-alerte/40 rounded-xl2 px-4 py-2.5">{erreur}</div>}
       <Field label="Nom complet" required>
         <Input value={nom} onChange={(e) => setNom(e.target.value)} autoFocus required />
       </Field>
@@ -205,7 +205,7 @@ function ReinitialiserForm({ utilisateurId, onClose }: { utilisateurId: string; 
   if (succes) {
     return (
       <div>
-        <p className="text-[13px] text-graphite mb-4">Mot de passe mis à jour. Communiquez-le en personne à l'utilisateur concerné.</p>
+        <p className="text-[13px] text-ardoise-700 mb-4">Mot de passe mis à jour. Communiquez-le en personne à l'utilisateur concerné.</p>
         <Button onClick={onClose} className="w-full">
           Fermer
         </Button>
@@ -215,7 +215,7 @@ function ReinitialiserForm({ utilisateurId, onClose }: { utilisateurId: string; 
 
   return (
     <form onSubmit={handleSubmit}>
-      {erreur && <div className="mb-4 text-[13px] font-medium text-hazard-h bg-signal-red/10 border-2 border-signal-red/40 rounded-md px-4 py-2.5">{erreur}</div>}
+      {erreur && <div className="mb-4 text-[13px] font-medium text-alerte bg-alerte/10 border-2 border-alerte/40 rounded-xl2 px-4 py-2.5">{erreur}</div>}
       <Field label="Nouveau mot de passe" required hint="Au moins 6 caractères — à communiquer en personne">
         <Input type="password" value={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} autoFocus required />
       </Field>

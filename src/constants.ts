@@ -192,16 +192,16 @@ export interface GraviteInfo {
 }
 
 export const GRAVITES: GraviteInfo[] = [
-  { code: 'A', categorie: 'Incident', label: 'A — Situation à risque', description: "Circonstance ou situation à risque de provoquer un événement indésirable (le patient n'est pas touché).", couleur: '#0f9d53', poids: 1 },
-  { code: 'B', categorie: 'Incident', label: 'B — Échappée belle', description: "Événement survenu, mais le patient n'a pas été touché (détecté à temps).", couleur: '#4f9d2f', poids: 2 },
-  { code: 'C', categorie: 'Accident', label: 'C — Sans conséquence', description: 'A touché le patient, sans conséquence ni surveillance additionnelle requise.', couleur: '#a8a415', poids: 3 },
-  { code: 'D', categorie: 'Accident', label: 'D — Surveillance requise', description: 'A touché le patient ; des vérifications additionnelles sont requises. Divulgation obligatoire.', couleur: '#d99a06', poids: 4 },
-  { code: 'E1', categorie: 'Accident', label: 'E1 — Conséquence mineure', description: 'Conséquence temporaire mineure, interventions non spécialisées, sans hospitalisation.', couleur: '#e2790a', poids: 5 },
-  { code: 'E2', categorie: 'Accident', label: 'E2 — Soins spécialisés', description: 'Conséquence temporaire nécessitant des soins spécialisés, sans impact sur la durée d\'hospitalisation.', couleur: '#e35f0e', poids: 6 },
-  { code: 'F', categorie: 'Accident', label: 'F — Hospitalisation', description: 'Conséquence temporaire exigeant des soins spécialisés avec impact sur la durée d\'hospitalisation.', couleur: '#dc3d1f', poids: 7 },
-  { code: 'G', categorie: 'Accident', label: 'G — Conséquence permanente', description: 'Conséquences permanentes sur les fonctions physiologiques, motrices, sensorielles ou cognitives.', couleur: '#c0201f', poids: 8 },
-  { code: 'H', categorie: 'Accident', label: 'H — Danger vital', description: 'Conséquences nécessitant des interventions de maintien de la vie.', couleur: '#8f0f1e', poids: 9 },
-  { code: 'I', categorie: 'Accident', label: 'I — Décès', description: "Conséquences ayant contribué au décès de l'usager.", couleur: '#3b0a10', poids: 10 }
+  { code: 'A', categorie: 'Incident', label: 'A — Situation à risque', description: "Circonstance ou situation à risque de provoquer un événement indésirable (le patient n'est pas touché).", couleur: '#2f8f6b', poids: 1 },
+  { code: 'B', categorie: 'Incident', label: 'B — Échappée belle', description: "Événement survenu, mais le patient n'a pas été touché (détecté à temps).", couleur: '#4c9a55', poids: 2 },
+  { code: 'C', categorie: 'Accident', label: 'C — Sans conséquence', description: 'A touché le patient, sans conséquence ni surveillance additionnelle requise.', couleur: '#8b9b2e', poids: 3 },
+  { code: 'D', categorie: 'Accident', label: 'D — Surveillance requise', description: 'A touché le patient ; des vérifications additionnelles sont requises. Divulgation obligatoire.', couleur: '#c79a1e', poids: 4 },
+  { code: 'E1', categorie: 'Accident', label: 'E1 — Conséquence mineure', description: 'Conséquence temporaire mineure, interventions non spécialisées, sans hospitalisation.', couleur: '#d98420', poids: 5 },
+  { code: 'E2', categorie: 'Accident', label: 'E2 — Soins spécialisés', description: 'Conséquence temporaire nécessitant des soins spécialisés, sans impact sur la durée d\'hospitalisation.', couleur: '#d9691e', poids: 6 },
+  { code: 'F', categorie: 'Accident', label: 'F — Hospitalisation', description: 'Conséquence temporaire exigeant des soins spécialisés avec impact sur la durée d\'hospitalisation.', couleur: '#cc4a1e', poids: 7 },
+  { code: 'G', categorie: 'Accident', label: 'G — Conséquence permanente', description: 'Conséquences permanentes sur les fonctions physiologiques, motrices, sensorielles ou cognitives.', couleur: '#b93424', poids: 8 },
+  { code: 'H', categorie: 'Accident', label: 'H — Danger vital', description: 'Conséquences nécessitant des interventions de maintien de la vie.', couleur: '#8e1f24', poids: 9 },
+  { code: 'I', categorie: 'Accident', label: 'I — Décès', description: "Conséquences ayant contribué au décès de l'usager.", couleur: '#5c1420', poids: 10 }
 ]
 
 export function graviteInfo(code: string): GraviteInfo {

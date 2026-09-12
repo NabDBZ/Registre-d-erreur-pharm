@@ -69,10 +69,10 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
   if (!evenement) {
     return (
       <div>
-        <Link to="/registre" className="text-[13px] text-brand-600 flex items-center gap-1 mb-4">
+        <Link to="/registre" className="text-[13px] text-sarcelle-600 flex items-center gap-1 mb-4">
           <ArrowLeft size={14} /> Retour au registre
         </Link>
-        <p className="text-steel">Événement introuvable.</p>
+        <p className="text-ardoise-500">Événement introuvable.</p>
       </div>
     )
   }
@@ -188,7 +188,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
   return (
     <div>
-      <Link to="/registre" className="text-[13px] text-brand-600 flex items-center gap-1 mb-4 no-print">
+      <Link to="/registre" className="text-[13px] text-sarcelle-600 flex items-center gap-1 mb-4 no-print">
         <ArrowLeft size={14} /> Retour au registre
       </Link>
 
@@ -235,14 +235,14 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
       />
 
       {estArchive && (
-        <Card className="p-4 mb-6 border-2 border-hazard-h bg-signal-red/5">
+        <Card className="p-4 mb-6 border-2 border-alerte bg-alerte/5">
           <div className="flex items-start gap-3">
-            <Archive className="text-hazard-h shrink-0 mt-0.5" size={18} />
+            <Archive className="text-alerte shrink-0 mt-0.5" size={18} />
             <div>
-              <p className="text-[13px] font-bold text-hazard-h">
+              <p className="text-[13px] font-bold text-alerte">
                 Signalement archivé le {evenement.supprime_le ? formatDateLongue(evenement.supprime_le.slice(0, 10)) : '—'} par {evenement.supprime_par || '—'}
               </p>
-              <p className="text-[13px] text-graphite mt-0.5">Motif : {evenement.motif_suppression || '—'}</p>
+              <p className="text-[13px] text-ardoise-700 mt-0.5">Motif : {evenement.motif_suppression || '—'}</p>
             </div>
           </div>
         </Card>
@@ -250,7 +250,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
       <div className="flex items-center gap-3 mb-6">
         <GraviteBadge code={evenement.gravite} />
-        <span className="text-[13px] text-graphite">{gi.description}</span>
+        <span className="text-[13px] text-ardoise-700">{gi.description}</span>
         <StatutBadge statut={evenement.statut} />
         {estArchive && <Badge tone="critical">Archivé</Badge>}
       </div>
@@ -258,7 +258,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
       <div className="grid grid-cols-3 gap-5 print-stack">
         <div className="col-span-2 space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Contexte</h3>
+            <h3 className="kicker text-ardoise-500 mb-4">Contexte</h3>
             <dl className="grid grid-cols-2 gap-y-3 text-[13px]">
               <Info label="Date de l'événement" value={`${formatDateLongue(evenement.date_evenement)}${evenement.heure_evenement ? ' à ' + evenement.heure_evenement : ''}`} />
               <Info label="Milieu" value={evenement.milieu} />
@@ -271,7 +271,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
           {(evenement.medicament_nom || evenement.medicament_din || evenement.classe_therapeutique) && (
             <Card className="p-6">
-              <h3 className="kicker text-steel mb-4">Médicament concerné</h3>
+              <h3 className="kicker text-ardoise-500 mb-4">Médicament concerné</h3>
               <dl className="grid grid-cols-2 gap-y-3 text-[13px]">
                 <Info label="Nom" value={evenement.medicament_nom || '—'} />
                 <Info label="DIN" value={evenement.medicament_din || '—'} />
@@ -282,15 +282,15 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           )}
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-3">Description</h3>
-            <p className="text-[13px] text-graphite whitespace-pre-wrap leading-relaxed">{evenement.description}</p>
+            <h3 className="kicker text-ardoise-500 mb-3">Description</h3>
+            <p className="text-[13px] text-ardoise-700 whitespace-pre-wrap leading-relaxed">{evenement.description}</p>
 
             {causes.length > 0 && (
               <>
-                <h4 className="text-[13px] font-semibold text-ink mt-5 mb-2">Causes probables</h4>
+                <h4 className="text-[13px] font-semibold text-encre mt-5 mb-2">Causes probables</h4>
                 <div className="flex flex-wrap gap-2">
                   {causes.map((c) => (
-                    <span key={c} className="text-[12px] bg-mist rounded-full px-3 py-1 text-graphite">
+                    <span key={c} className="text-[12px] bg-ligne rounded-full px-3 py-1 text-ardoise-700">
                       {c}
                     </span>
                   ))}
@@ -300,42 +300,42 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
             {evenement.mesures_correctives && (
               <>
-                <h4 className="text-[13px] font-semibold text-ink mt-5 mb-2">Mesures correctives</h4>
-                <p className="text-[13px] text-graphite whitespace-pre-wrap leading-relaxed">{evenement.mesures_correctives}</p>
+                <h4 className="text-[13px] font-semibold text-encre mt-5 mb-2">Mesures correctives</h4>
+                <p className="text-[13px] text-ardoise-700 whitespace-pre-wrap leading-relaxed">{evenement.mesures_correctives}</p>
               </>
             )}
           </Card>
 
           <Card className="p-6">
             <div className="flex items-center gap-2 mb-1">
-              <ListChecks size={15} className="text-steel" />
-              <h3 className="kicker text-steel">Mesures correctives — suivi</h3>
+              <ListChecks size={15} className="text-ardoise-500" />
+              <h3 className="kicker text-ardoise-500">Mesures correctives — suivi</h3>
             </div>
-            <p className="text-[12px] text-steel mb-4">Transformez le plan d'action en tâches concrètes, avec responsable et échéance.</p>
+            <p className="text-[12px] text-ardoise-500 mb-4">Transformez le plan d'action en tâches concrètes, avec responsable et échéance.</p>
             {actionsCorrectives.length === 0 ? (
-              <p className="text-[13px] text-steel mb-4">Aucune action de suivi ajoutée.</p>
+              <p className="text-[13px] text-ardoise-500 mb-4">Aucune action de suivi ajoutée.</p>
             ) : (
               <div className="space-y-2 mb-4">
                 {actionsCorrectives.map((a) => {
                   const enRetard = !a.complete && a.echeance && a.echeance < todayLocalIso()
                   return (
-                    <div key={a.id} className={`flex items-start gap-3 rounded-md px-3 py-2.5 border ${a.complete ? 'bg-mist/50 border-fog' : enRetard ? 'bg-signal-red/5 border-hazard-h/40' : 'bg-white border-fog'}`}>
+                    <div key={a.id} className={`flex items-start gap-3 rounded-xl2 px-3 py-2.5 border ${a.complete ? 'bg-ligne/50 border-ligne' : enRetard ? 'bg-alerte/5 border-alerte/40' : 'bg-white border-ligne'}`}>
                       <input
                         type="checkbox"
                         checked={!!a.complete}
                         disabled={estArchive}
                         onChange={(e) => handleToggleAction(a.id, e.target.checked)}
-                        className="no-print mt-1 shrink-0 accent-brand-500 disabled:cursor-not-allowed"
+                        className="no-print mt-1 shrink-0 accent-sarcelle disabled:cursor-not-allowed"
                       />
                       <div className="min-w-0 flex-1">
-                        <p className={`text-[13px] font-medium ${a.complete ? 'text-steel line-through' : 'text-ink'}`}>
+                        <p className={`text-[13px] font-medium ${a.complete ? 'text-ardoise-500 line-through' : 'text-encre'}`}>
                           <span className="hidden print:inline mr-1.5">{a.complete ? '☑' : '☐'}</span>
                           {a.description}
                         </p>
-                        <div className="flex items-center gap-3 mt-1 text-[11.5px] text-steel">
+                        <div className="flex items-center gap-3 mt-1 text-[11.5px] text-ardoise-500">
                           {a.responsable && <span>Responsable : {a.responsable}</span>}
                           {a.echeance && (
-                            <span className={`flex items-center gap-1 ${enRetard ? 'text-hazard-h font-semibold' : ''}`}>
+                            <span className={`flex items-center gap-1 ${enRetard ? 'text-alerte font-semibold' : ''}`}>
                               <CalendarClock size={12} /> {enRetard ? 'En retard depuis le ' : 'Échéance : '}
                               {formatDateLongue(a.echeance)}
                             </span>
@@ -344,7 +344,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
                         </div>
                       </div>
                       {!estArchive && (
-                        <button onClick={() => handleSupprimerAction(a.id)} className="no-print text-steel hover:text-hazard-h shrink-0 p-1" title="Retirer">
+                        <button onClick={() => handleSupprimerAction(a.id)} className="no-print text-ardoise-500 hover:text-alerte shrink-0 p-1" title="Retirer">
                           <Trash2 size={13} />
                         </button>
                       )}
@@ -380,29 +380,29 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           </Card>
 
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-1">Personnes impliquées</h3>
-            <p className="text-[12px] text-steel mb-4">La signature électronique confirme la prise de connaissance du signalement par la personne concernée.</p>
+            <h3 className="kicker text-ardoise-500 mb-1">Personnes impliquées</h3>
+            <p className="text-[12px] text-ardoise-500 mb-4">La signature électronique confirme la prise de connaissance du signalement par la personne concernée.</p>
             {evenement.personnes.length === 0 ? (
-              <p className="text-[13px] text-steel">Aucune personne enregistrée.</p>
+              <p className="text-[13px] text-ardoise-500">Aucune personne enregistrée.</p>
             ) : (
               <div className="space-y-2">
                 {evenement.personnes.map((p) => (
-                  <div key={p.id} className="flex items-center justify-between gap-3 text-[13px] bg-mist rounded-lg px-3 py-2.5">
+                  <div key={p.id} className="flex items-center justify-between gap-3 text-[13px] bg-ligne rounded-lg px-3 py-2.5">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-ink font-medium">{p.nom_affiche}</span>
-                        <span className="text-steel">· {p.role_evenement}</span>
+                        <span className="text-encre font-medium">{p.nom_affiche}</span>
+                        <span className="text-ardoise-500">· {p.role_evenement}</span>
                       </div>
                       {p.signature_data ? (
-                        <p className="flex items-center gap-1.5 text-[11.5px] text-brand-700 font-semibold mt-1">
+                        <p className="flex items-center gap-1.5 text-[11.5px] text-sarcelle-600 font-semibold mt-1">
                           <ShieldCheck size={13} /> Signé électroniquement le {formatDateHeureLongue(p.signe_le)}
                         </p>
                       ) : (
-                        <p className="text-[11.5px] text-steel mt-1">Non signé</p>
+                        <p className="text-[11.5px] text-ardoise-500 mt-1">Non signé</p>
                       )}
                     </div>
                     {p.signature_data ? (
-                      <img src={p.signature_data} alt="" className="no-print h-9 shrink-0 bg-white rounded border border-fog px-1" />
+                      <img src={p.signature_data} alt="" className="no-print h-9 shrink-0 bg-white rounded border border-ligne px-1" />
                     ) : (
                       !estArchive && (
                         <Button variant="secondary" size="sm" className="no-print shrink-0" onClick={() => setSignataire(p)}>
@@ -418,21 +418,21 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
           <Card className="p-6 no-print">
             <div className="flex items-center gap-2 mb-3">
-              <History size={15} className="text-steel" />
-              <h3 className="kicker text-steel">Historique et traçabilité</h3>
+              <History size={15} className="text-ardoise-500" />
+              <h3 className="kicker text-ardoise-500">Historique et traçabilité</h3>
             </div>
             {historique.length === 0 ? (
-              <p className="text-[13px] text-steel">Aucune entrée.</p>
+              <p className="text-[13px] text-ardoise-500">Aucune entrée.</p>
             ) : (
               <div className="space-y-2.5">
                 {historique.map((h) => (
-                  <div key={h.id} className="flex items-start gap-3 text-[13px] border-b border-fog last:border-0 pb-2.5 last:pb-0">
-                    <span className="num text-[11px] text-steel whitespace-nowrap mt-0.5">
+                  <div key={h.id} className="flex items-start gap-3 text-[13px] border-b border-ligne last:border-0 pb-2.5 last:pb-0">
+                    <span className="num text-[11px] text-ardoise-500 whitespace-nowrap mt-0.5">
                       {h.horodatage.slice(0, 10)} {h.horodatage.slice(11, 16)}
                     </span>
                     <div className="min-w-0">
-                      <span className="text-ink font-medium">{h.utilisateur_nom}</span>
-                      <span className="text-steel"> — {h.details || h.action}</span>
+                      <span className="text-encre font-medium">{h.utilisateur_nom}</span>
+                      <span className="text-ardoise-500"> — {h.details || h.action}</span>
                     </div>
                   </div>
                 ))}
@@ -443,8 +443,8 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
         <div className="space-y-5">
           <Card className="p-6">
-            <h3 className="kicker text-steel mb-4">Divulgation au patient</h3>
-            <p className="text-[13px] text-graphite mb-2">{evenement.divulgue_patient ? 'Divulgué' : 'Non divulgué'}</p>
+            <h3 className="kicker text-ardoise-500 mb-4">Divulgation au patient</h3>
+            <p className="text-[13px] text-ardoise-700 mb-2">{evenement.divulgue_patient ? 'Divulgué' : 'Non divulgué'}</p>
             {evenement.divulgue_patient === 1 && (
               <dl className="text-[13px] space-y-2">
                 <Info label="Date" value={evenement.divulgue_le || '—'} />
@@ -455,10 +455,10 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 
           <Card className="p-6">
             <div className="flex items-center gap-2 mb-4">
-              <ShieldAlert size={15} className="text-steel" />
-              <h3 className="kicker text-steel">Avis à la FARPOPQ</h3>
+              <ShieldAlert size={15} className="text-ardoise-500" />
+              <h3 className="kicker text-ardoise-500">Avis à la FARPOPQ</h3>
             </div>
-            <p className="text-[13px] text-graphite mb-2">{evenement.farpopq_avise ? "Fonds d'assurance avisé" : 'Non avisé'}</p>
+            <p className="text-[13px] text-ardoise-700 mb-2">{evenement.farpopq_avise ? "Fonds d'assurance avisé" : 'Non avisé'}</p>
             {evenement.farpopq_avise === 1 && (
               <>
                 <dl className="text-[13px] space-y-2 mb-3">
@@ -467,8 +467,8 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
                 </dl>
                 {evenement.farpopq_resume && (
                   <details className="text-[12px]">
-                    <summary className="text-brand-600 font-semibold cursor-pointer select-none">Voir le résumé transmis</summary>
-                    <pre className="mt-2 text-ink bg-mist border border-fog rounded-md p-3 max-h-[220px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
+                    <summary className="text-sarcelle-600 font-semibold cursor-pointer select-none">Voir le résumé transmis</summary>
+                    <pre className="mt-2 text-ardoise-900 bg-ligne border border-ligne rounded-xl2 p-3 max-h-[220px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
                       {evenement.farpopq_resume}
                     </pre>
                   </details>
@@ -488,7 +488,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
           </Card>
 
           <Card className="p-6 no-print">
-            <h3 className="kicker text-steel mb-3">Traçabilité</h3>
+            <h3 className="kicker text-ardoise-500 mb-3">Traçabilité</h3>
             <dl className="text-[13px] space-y-2.5">
               <Info label="Créé par" value={evenement.cree_par || '—'} />
               <Info label="Créé le" value={formatDateLongue(evenement.cree_le.slice(0, 10))} />
@@ -499,7 +499,7 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
       </div>
 
       <Modal open={archiveModal} onClose={() => setArchiveModal(false)} title="Archiver ce signalement">
-        <p className="text-[13px] text-graphite mb-4">
+        <p className="text-[13px] text-ardoise-700 mb-4">
           Le signalement #{evenement.numero} sera retiré du registre actif mais <strong>jamais supprimé</strong> — il reste consultable dans les archives et
           cette action est journalisée avec votre nom.
         </p>
@@ -538,8 +538,8 @@ export default function Detail({ onChanged }: { onChanged: () => void }) {
 function Info({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-steel text-[12px] mb-0.5">{label}</dt>
-      <dd className="text-ink font-medium">{value}</dd>
+      <dt className="text-ardoise-500 text-[12px] mb-0.5">{label}</dt>
+      <dd className="text-encre font-medium">{value}</dd>
     </div>
   )
 }

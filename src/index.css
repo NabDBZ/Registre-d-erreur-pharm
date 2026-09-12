@@ -1,3 +1,39 @@
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/IBMPlexSans-Variable.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexSans-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/IBMPlexMono-SemiBold.woff2') format('woff2');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,12 +44,12 @@ html, body, #root {
 }
 
 body {
-  @apply bg-canvas text-ink antialiased;
+  @apply bg-papier text-ardoise-900 antialiased;
   font-feature-settings: "cv11", "ss01";
 }
 
 .chart-paper {
-  background-color: theme('colors.canvas');
+  background-color: theme('colors.papier');
   background-image: theme('backgroundImage.chart');
   background-size: theme('backgroundSize.chart');
   background-position: -1px -1px;
@@ -35,10 +71,6 @@ body {
 
 .hazard-diamond {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
-.hazard-stripe {
-  background: repeating-linear-gradient(135deg, var(--stripe-a) 0px, var(--stripe-a) 9px, var(--stripe-b) 9px, var(--stripe-b) 18px);
 }
 
 @keyframes page-in {
@@ -74,8 +106,8 @@ body {
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(15,157,83,0.5); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(15,157,83,0); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(14,124,116,0.5); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(14,124,116,0); }
 }
 .pulse-dot {
   animation: pulse-dot 2.4s ease-in-out infinite;
@@ -92,8 +124,8 @@ body {
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #c7d2cb; border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: #aab8ad; }
+::-webkit-scrollbar-thumb { background: #c3cdca; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #9baaaa; }
 
 @media print {
   .no-print { display: none !important; }
@@ -103,5 +135,5 @@ body {
   .chart-paper { background-image: none !important; }
   .print-stack { display: block !important; }
   .print-stack > * { margin-bottom: 12px; break-inside: avoid; }
-  .shadow-card, .shadow-pop { box-shadow: none !important; }
+  .shadow-card, .shadow-pop, .shadow-modal { box-shadow: none !important; }
 }
